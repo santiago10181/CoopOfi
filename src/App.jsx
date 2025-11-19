@@ -2,7 +2,9 @@ import Navbar from "./components/layout/Navbar";
 import Hero from "./components/layout/Hero";
 import Solution from "./components/layout/Solution";
 import Features from "./components/layout/Features";
-// import Footer from "./components/layout/Footer";
+import Pricing from "./components/layout/Pricing";
+import CallAct from "./components/layout/CallAct";
+import Footer from "./components/layout/Footer";
 
 const App = () => {
   return (
@@ -11,6 +13,9 @@ const App = () => {
       <Hero />
       <Solution />
       <Features />
+      <Pricing  />
+      <CallAct />
+      <Footer />
     </>
   );
 };
