@@ -1,5 +1,4 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+
 import ImageBan from "../frames/ImageBan";
 import {LowText, Title, Description} from '../../data_info/DataCall.js';
 import TitlesSection from '../frames/TitlesSection';
