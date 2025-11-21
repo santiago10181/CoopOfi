@@ -1,5 +1,10 @@
 import React from 'react';
-import { Facebook, Twitter, Linkedin, Youtube } from 'lucide-react'; // Usaremos Twitter como X por ahora o un SVG custom
+ // Usaremos Twitter como X por ahora o un SVG custom
+import ListFoot from '../common/ListFoot';
+import ButtonFoot from '../common/ButtonFoot';
+import Brand from '../common/Brand';
+import UnionLinks from '../frames/UnionLinks';
+import SocialIcon from '../frames/SocialIcon';
 
 const Footer = () => {
   return (
@@ -11,54 +16,31 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
             
             {/* Columna 1: Solutions */}
-            <div>
-              <h4 className="font-bold text-[#1a1a1a] text-lg mb-6">Solutions</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">Professional</a></li>
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">Personal</a></li>
-              </ul>
-            </div>
+            <ListFoot text1="For Individuals" text2="For Business" />
 
             {/* Columna 2: Products */}
-            <div>
-              <h4 className="font-bold text-[#1a1a1a] text-lg mb-6">Products</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">Products</a></li>
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">Canary Care Shop</a></li>
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">About</a></li>
-              </ul>
-            </div>
+            <ListFoot text1="Products" text2="Canary Care Shop" />  
 
             {/* Columna 3: Support */}
-            <div>
-              <h4 className="font-bold text-[#1a1a1a] text-lg mb-6">Support</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">FAQs</a></li>
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">News</a></li>
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">Contact</a></li>
-                <li><a href="#" className="text-[#1a1a1a] hover:text-gray-600 transition-colors">Careers</a></li>
-              </ul>
-            </div>
+            <ListFoot text1="Help Center" text2="Contact Us" />
 
             {/* Columna 4: App Stores (Alineado a la derecha en desktop) */}
             <div className="flex flex-col items-start lg:items-end gap-3">
               {/* Botón App Store (Simulado o imagen real) */}
-              <button className="bg-black text-white rounded-lg px-4 py-2 flex items-center gap-3 hover:opacity-80 transition-opacity w-40 border border-white/10">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg" alt="Apple" className="w-6 h-6" />
-                <div className="text-left leading-tight">
-                  <div className="text-[10px] font-medium">Download on the</div>
-                  <div className="text-sm font-bold">App Store</div>
-                </div>
-              </button>
+              <ButtonFoot 
+                text1="Download on the"
+                text2="App Store"
+                url="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
+                alt="App Store"
+              />
 
               {/* Botón Google Play */}
-              <button className="bg-black text-white rounded-lg px-4 py-2 flex items-center gap-3 hover:opacity-80 transition-opacity w-40 border border-white/10">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play" className="w-6 h-6" />
-                <div className="text-left leading-tight">
-                  <div className="text-[10px] font-medium">GET IT ON</div>
-                  <div className="text-sm font-bold">Google Play</div>
-                </div>
-              </button>
+              <ButtonFoot 
+                text1="GET IT ON"
+                text2="Google Play"
+                url="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"
+                alt="Google Play"
+              />
             </div>
 
           </div>
@@ -67,62 +49,22 @@ const Footer = () => {
           <div className="mt-24 md:mt-32 flex flex-col items-start relative z-20">
             
             {/* Logo Canary Care */}
-            <div className="flex items-center gap-2 mb-8">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
-                <path d="M16 7h.01"/>
-                <path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/>
-              </svg>
-              <div className="flex flex-col justify-center leading-none">
-                <span className="text-xl font-bold text-black">Canary</span>
-                <span className="text-xl font-bold text-black">Care</span>
-              </div>
-            </div>
+            <Brand className="mb-8" />
 
             {/* Enlaces Legales */}
             <div className="flex flex-wrap gap-6 text-sm font-medium text-[#1a1a1a] mb-4">
-              <a href="#" className="hover:underline">Privacy Policy</a>
-              <a href="#" className="hover:underline">Terms & Conditions</a>
-              <a href="#" className="hover:underline">Cookie Preferences</a>
+              <UnionLinks text1="Privacy Policy" text2="Terms of Service" text3="Cookie Policy"
+              className="text-sm"
+              />
             </div>
-
             {/* Copyright */}
             <p className="text-sm text-[#1a1a1a]/70">
               © Canary Care Global Limited 2025
             </p>
           </div>
         </div>
-
-        {/* --- FIGURA ABSTRACTA AMARILLA (Fondo derecha) --- */}
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] pointer-events-none z-10">
-          {/* SVG dibujado a mano para imitar la curva */}
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full fill-[#FFD500]">
-            <path d="M0 100 C 20 60, 50 60, 60 30 S 100 0, 100 0 V 100 H 0 Z" />
-            {/* Este path es una aproximación artística de la curva */}
-            <path d="M50 100 C 50 80, 80 40, 100 30 V 100 H 50 Z" fill="#FFD500" /> 
-            {/* Usamos una forma más simple para asegurar que cubra la esquina */}
-             <path d="M100 100 H 0 C 10 80 30 70 45 65 C 60 60 70 30 100 20 V 100 Z" />
-          </svg>
-        </div>
-
         {/* --- REDES SOCIALES (Posicionadas sobre la figura amarilla) --- */}
-        <div className="absolute bottom-10 right-6 md:bottom-16 md:right-16 z-30 flex gap-4">
-          {[
-            { Icon: Facebook, href: '#' },
-            { Icon: Twitter, href: '#' }, // Representando X
-            { Icon: Linkedin, href: '#' },
-            { Icon: Youtube, href: '#' }
-          ].map((social, index) => (
-            <a 
-              key={index} 
-              href={social.href}
-              className="w-10 h-10 rounded-full bg-[#FFD500] text-[#1a1a1a] flex items-center justify-center hover:bg-black hover:text-[#FFD500] transition-all duration-300 shadow-sm"
-            >
-              {/* Si es X (Twitter), podríamos usar un SVG custom, pero aquí usamos el de la librería */}
-              <social.Icon className="w-5 h-5" />
-            </a>
-          ))}
-        </div>
-
+        <SocialIcon />
       </div>
     </footer>
   );

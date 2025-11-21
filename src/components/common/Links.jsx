@@ -1,6 +1,6 @@
 const Links = ({ text, href="#" , className}) => {
     return (
-        <a href={href} className={`text-lg font-medium text-black ${className}`}>{text}</a>
+        <a href={href} className={`font-medium text-black ${className}`}>{text}</a>
     )
 }
 export default Links;

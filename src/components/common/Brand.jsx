@@ -1,7 +1,7 @@
 
-const Brand = () => {
+const Brand = ({className}) => {
     return (
-            <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+            <div className={`flex-shrink-0 flex items-center gap-2 cursor-pointer ${className}`}>
               {/* SVG del Pájaro (Recreado simple) */}
               <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
                 <path d="M16 7h.01"/>
