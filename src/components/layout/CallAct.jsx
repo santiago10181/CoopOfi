@@ -1,5 +1,15 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import ImageBan from "../frames/ImageBan";
+import {LowText, Title, Description} from '../../data_info/DataCall.js';
+import TitlesSection from '../frames/TitlesSection';
+import Button from '../common/Button.jsx';
+
+  const ClassName = {
+  classNameMicro:"text-[#1a1a1a] font-bold text-xs tracking-[0.15em] uppercase mb-5",
+  classNameTitle:"text-[#1a1a1a] text-4xl md:text-[52px] font-bold leading-[1.1] mb-6",
+  classNameDesc:"text-gray-600 text-lg md:text-[20px] leading-relaxed mb-10",
+  }
 
 const PromiseSection = () => {
   return (
@@ -11,46 +21,23 @@ const PromiseSection = () => {
           {/* 1. COLUMNA IZQUIERDA (Texto) */}
           <div className="w-full lg:w-5/12 flex flex-col items-start">
             
-            {/* Eyebrow (Texto pequeño superior) */}
-            <span className="text-[#1a1a1a] font-bold text-xs tracking-[0.15em] uppercase mb-5">
-              Why choose us?
-            </span>
-
-            {/* Título */}
-            <h2 className="text-[#1a1a1a] text-4xl md:text-[52px] font-bold leading-[1.1] mb-6">
-              Our promise to you
-            </h2>
-
-            {/* Párrafo */}
-            <p className="text-gray-600 text-lg md:text-[20px] leading-relaxed mb-10">
-              Our number one goal is to keep our most vulnerable safe and give peace 
-              of mind to those who care for them. Explore the team behind this 
-              mission, and the key values behind every piece of smart care technology.
-            </p>
+            <TitlesSection 
+              LowText={LowText} 
+              Title0={Title[0]} Title1={Title[1]} Title2={Title[2]}              
+              Description={Description} 
+              className={ClassName}
+            />
 
             {/* Botón CTA */}
-            <button className="bg-[#40E0D0] hover:bg-[#35cec0] text-[#1a1a1a] font-bold text-[15px] py-3.5 px-8 rounded-full flex items-center gap-2 transition-colors shadow-sm">
-              Our values
-              <ArrowRight className="w-4 h-4 stroke-[3]" />
-            </button>
+            <Button
+              text="Our values"
+              className={`mt-6 bg-[#40E0D0] hover:bg-[#35cec0] text-[#1a1a1a] font-bold text-[15px] py-3.5 px-8 rounded-full flex items-center gap-2 transition-colors shadow-sm`}
+            />
+
           </div>
 
           {/* 2. COLUMNA DERECHA (Imagen) */}
-          <div className="w-full lg:w-7/12">
-            {/* Contenedor de imagen con bordes redondeados */}
-            <div className="relative h-[400px] md:h-[550px] w-full rounded-[2.5rem] overflow-hidden shadow-lg">
-              {/* Imagen de fondo */}
-              {/* Usamos una imagen de Unsplash de escaleras para simular la original */}
-              <img 
-                src="https://images.unsplash.com/photo-1595846519845-68e298c2edd8?q=80&w=2070&auto=format&fit=crop" 
-                alt="Senior person walking up stairs with safety sensor" 
-                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
-              />
-              
-              {/* Overlay opcional sutil si la imagen es muy brillante */}
-              <div className="absolute inset-0 bg-black/5"></div>
-            </div>
-          </div>
+          <ImageBan />
 
         </div>
       </div>
