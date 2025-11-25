@@ -30,6 +30,7 @@ const Hero = () => {
                   className={`bg-[#FFD500] hover:bg-[#e6c000] text-[#1a1a1a] text-lg 
                     font-bold py-4 px-8 rounded-full flex items-center gap-2 transition-all 
                     transform hover:-translate-y-1 shadow-lg hover:shadow-xl`}
+                    href="/CoopOfi/login"
            />
         </div>
       </div>

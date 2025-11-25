@@ -1,23 +1,14 @@
-import Navbar from "./components/layout/Navbar";
-import Hero from "./components/layout/Hero";
-import Solution from "./components/layout/Solution";
-import Features from "./components/layout/Features";
-import Pricing from "./components/layout/Pricing";
-import CallAct from "./components/layout/CallAct";
-import Footer from "./components/layout/Footer";
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Login from './pages/Login'
 
 const App = () => {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Solution />
-      <Features />
-      <Pricing  />
-      <CallAct />
-      <Footer />
-    </>
-  );
-};
+    <Routes>
+      <Route path="/CoopOfi" element={<Home />} />
+      <Route path="/CoopOfi/login/" element={<Login />} />
+    </Routes>
+  )
+}
 
-export default App;
+export default App
