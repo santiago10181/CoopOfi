@@ -1,10 +1,10 @@
+import pruebaPOst from "../../Fetch/RequireLogin";
+
 const handleSubmit = async (e, validateForm, setIsLoading) => {
       e.preventDefault();
-      if (!validateForm()) return;
+      if (!validateForm) return;
       setIsLoading(true);
-      setTimeout(() => {
-      setIsLoading(false);
-      alert('Login logic would trigger here. Welcome to CoopOfi!');
-      }, 1500);
+    await pruebaPOst();
+    setIsLoading(false);
   };
  export default handleSubmit;
