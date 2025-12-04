@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from "react-router-dom";
-import DashboardUser from "../componentes_dashboard/dashboard_user/layout/DashboardUser";
+import FrameToChield from "../componentes_dashboard/frame/FrameToChild";
 import { useAuth } from "../PrivateRoutes/AuthContext";
 
 const DashboardUserPage = () => {
@@ -16,7 +16,7 @@ const DashboardUserPage = () => {
     );
   }
 
-  return <DashboardUser />;
+  return <FrameToChield />;
 };
 
 export default DashboardUserPage;
