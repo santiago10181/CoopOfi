@@ -5,6 +5,9 @@ const router = express.Router();
 
 
 router.get('/', authenticateToken, (req, res) => {
+
+  const token = req.headers['authorization'];
+  console.log('Token recibido:', token);
    
   res.json({
     success: true,
