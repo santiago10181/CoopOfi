@@ -1,10 +1,21 @@
-const handleSubmit = async (e, validateForm, setIsLoading) => {
+import loginUser from "../../apis/FuncLoginCall";
+
+const handleSubmit = async (e,validateForm,setIsLoading,formData,navigate) => {
       e.preventDefault();
-      if (!validateForm()) return;
+      if (!validateForm) return;
       setIsLoading(true);
-      setTimeout(() => {
-      setIsLoading(false);
-      alert('Login logic would trigger here. Welcome to CoopOfi!');
-      }, 1500);
-  };
+      console.log('Form submitted',formData);
+      try {
+        const response = await loginUser(formData.email, formData.password)
+        navigate('/CoopOfi/dashboard/');
+        return response;
+      } catch (error) { 
+        console.error('Login failed:', error);
+        throw error;
+      } 
+      finally {
+        setIsLoading(false);
+      }
+};
  export default handleSubmit;
+ 

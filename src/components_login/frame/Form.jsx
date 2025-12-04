@@ -6,8 +6,11 @@ import handleSubmit from '../controllers/HandleSubmit';
 import handleInputChange from '../controllers/HandleInput';
 import validateForm from '../controllers/ValidateForm';
 import Remember from './Remember';
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+
+const navigate = useNavigate();
 
 const [showPassword, setShowPassword] = useState(false);
 const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +18,7 @@ const [formData, setFormData] = useState({ email: '', password: '' });
 const [errors, setErrors] = useState({ email: '', password: '' });
 
     return (
-        <form onSubmit={(e) => handleSubmit(e, validateForm(formData,setErrors), setIsLoading)} className="space-y-6">
+        <form onSubmit={(e) => handleSubmit(e, validateForm(formData,setErrors), setIsLoading, formData, navigate)} className="space-y-6">
             <Input 
                 label="Member Email"
                 name="email"

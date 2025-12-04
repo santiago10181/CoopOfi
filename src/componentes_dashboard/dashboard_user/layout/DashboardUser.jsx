@@ -1,5 +1,4 @@
 import ContentDashboard from "../../frame/ContentDashboard";
-
 const DashboardUser = () => {
     return (
         <>

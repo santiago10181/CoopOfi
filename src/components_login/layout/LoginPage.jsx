@@ -1,8 +1,7 @@
 import Brand from '../common/Brand';
 import  TextP  from '../common/TextP';
 import Form from '../frame/Form';
-import Img_izq from '../../assets/images/login/Img_login_izq.png';
-import CardFloat from '../frame/CardFloat';
+
 
 export const LoginPage = () => {
 
