@@ -1,7 +1,7 @@
 import Brand from '../common/Brand';
 import NavLinks from '../common/NavLinks';
 import ImageUser from '../common/ImageUser';
-import NameUser from '../common/NameUser';
+
 
 const Sidebar = () => {
   return (
@@ -14,20 +14,20 @@ const Sidebar = () => {
       <nav className="flex flex-col gap-2 flex-1">
         
         {/* Asistente IA */}
-            <NavLinks Name="Asistente IA" to="/dashboard/ai-assistant" />
+            <NavLinks Name="Asistente IA" to="/CoopOfi/dashboard" />
             {/* Préstamos */}
-            <NavLinks Name="Préstamos" to="/dashboard/loans" />
+            <NavLinks Name="Solicitud de credito" to="solicitud-creditos" />
             {/* Auxilios */}
-            <NavLinks Name="Auxilios" to="/dashboard/aid" />
+            <NavLinks Name="Auxilios" to="auxilios" />
             {/* Actualización de datos */}
-            <NavLinks Name="Actualización de datos" to="/profile" />
+            <NavLinks Name="Actualización de datos" to="/CoopOfi/profile" />
       </nav>
 
       {/* Usuario al final */}
       <div className="border-t border-gray-200 pt-4 mt-4">
         <div className="flex items-center gap-3 px-3 py-2">
           <ImageUser />
-          <NameUser />  
+          <p>Pepito Juan</p>  
         </div>
       </div>
     </aside>
