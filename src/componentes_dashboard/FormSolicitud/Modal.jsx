@@ -4,12 +4,12 @@ import Contenedor from "./Contenedor"
 const Modal = ({onClick}) => {
     return (
         <OverLay>
-            <button 
+            {/* <button 
                 onClick={onClick}
                 className="bg-white p-6 rounded-lg shadow-lg">
                     Close Modal
-            </button>
-            <Contenedor />
+            </button> */}
+            <Contenedor onclick={onClick}/>
         </OverLay>
     )
 };
