@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
@@ -47,10 +47,13 @@ const Hero = () => {
           </p>
 
           {/* Botón de Acción (CTA) */}
-          <button className="bg-[#FFD500] hover:bg-[#e6c000] text-[#1a1a1a] text-lg font-bold py-4 px-8 rounded-full flex items-center gap-2 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+          <Link 
+            to="/login" 
+            className="bg-[#FFD500] hover:bg-[#e6c000] text-[#1a1a1a] text-lg font-bold py-4 px-8 rounded-full inline-flex items-center gap-2 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+          >
             Get in touch
             <ArrowRight className="w-5 h-5 stroke-[3]" />
-          </button>
+          </Link>
         </div>
 
         {/* 3. IMAGEN DEL DISPOSITIVO (HUB) */}
