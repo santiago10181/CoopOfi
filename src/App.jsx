@@ -1,37 +1,36 @@
-// src/App.jsx
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-// 🚀 IMPORTS DINÁMICOS (Lazy Loading)
-// Estos componentes solo se cargarán cuando el usuario navegue a la ruta
+// Páginas Públicas
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const LoginPage = lazy(() => import("./page_login/LoginPage"));
 
-// Componente de carga elegante (Skeleton o Spinner)
+// Módulo Dashboard (Rutas actualizadas a la nueva carpeta)
+const DashboardLayout = lazy(() => import("./dashboard/layout/DashboardLayout"));
+const DashboardHome = lazy(() => import("./dashboard/pages/DashboardHome"));
+
+// Loader simple
 const PageLoader = () => (
-  <div className="flex h-screen w-full items-center justify-center bg-white">
-    <div className="w-10 h-10 border-4 border-gray-200 border-t-[#FFD500] rounded-full animate-spin"></div>
+  <div className="flex h-screen w-full items-center justify-center">
+    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-yellow-500"></div>
   </div>
 );
 
 const App = () => {
   return (
     <BrowserRouter>
-      {/* Suspense atrapa los componentes que aún no se han cargado */}
       <Suspense fallback={<PageLoader />}>
         <Routes>
+          {/* Rutas Públicas */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
 
-          <Route 
-            path="/dashboard" 
-            element={
-              <div className="flex h-screen items-center justify-center font-bold text-2xl">
-                Panel de Control
-              </div>
-            } 
-          />
+          {/* Rutas Privadas */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<DashboardHome />} />
+          </Route>
 
+          {/* Redirección 404 */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
