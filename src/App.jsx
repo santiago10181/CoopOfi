@@ -7,7 +7,8 @@ const LoginPage = lazy(() => import("./page_login/LoginPage"));
 
 // Módulo Dashboard (Rutas actualizadas a la nueva carpeta)
 const DashboardLayout = lazy(() => import("./dashboard/layout/DashboardLayout"));
-const DashboardHome = lazy(() => import("./dashboard/pages/DashboardHome"));
+const ContentHome = lazy(() => import("./dashboard/pages/Home"));
+const DashboardChatBot = lazy(() => import("./dashboard/pages/chatbot"));
 
 // Loader simple
 const PageLoader = () => (
@@ -27,7 +28,8 @@ const App = () => {
 
           {/* Rutas Privadas */}
           <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<DashboardHome />} />
+            <Route index element={<ContentHome />} />
+            <Route path="chatbot" element={<DashboardChatBot />} />
           </Route>
 
           {/* Redirección 404 */}
