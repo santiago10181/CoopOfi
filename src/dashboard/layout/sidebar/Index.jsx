@@ -9,7 +9,7 @@ import {
 
 const MENU_ITEMS = [
   { icon: LayoutDashboard, label: "Resumen", path: "/dashboard" },
-  { icon: Bot, label: "Chatbot", path: "/dashboard/chatbot" }, // Aquí está tu link
+  { icon: Bot, label: "Chatbot", path: "/dashboard/chatbot" },
   { icon: FileText, label: "Convenios", path: "/dashboard/convenios" },
   { icon: Wallet, label: "Mis Créditos", path: "/dashboard/creditos" },
   { icon: ArrowLeftRight, label: "Auxilios", path: "/dashboard/auxilios" },

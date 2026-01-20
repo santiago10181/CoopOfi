@@ -1,4 +1,4 @@
-import { ChatWindow } from "./ChatWindow"; // Ajusta la ruta
+import { ChatWindow } from "./chatWindow/ChatWindow"; // Ajusta la ruta
 
 const DashboardChatBot = () => {
   return (

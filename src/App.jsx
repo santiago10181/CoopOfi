@@ -9,6 +9,8 @@ const LoginPage = lazy(() => import("./page_login/LoginPage"));
 const DashboardLayout = lazy(() => import("./dashboard/layout/DashboardLayout"));
 const ContentHome = lazy(() => import("./dashboard/pages/Home"));
 const DashboardChatBot = lazy(() => import("./dashboard/pages/chatbot"));
+const DashboardCreditos = lazy(() => import("./dashboard/pages/creditos"));
+const RequestCreditPage = lazy(() => import("./dashboard/pages/creditos/solicitud_credito_form"));
 
 // Loader simple
 const PageLoader = () => (
@@ -30,6 +32,8 @@ const App = () => {
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<ContentHome />} />
             <Route path="chatbot" element={<DashboardChatBot />} />
+            <Route path="creditos" element={<DashboardCreditos />} />
+            <Route path="creditos/nueva-solicitud" element={<RequestCreditPage />} />
           </Route>
 
           {/* Redirección 404 */}

@@ -14,7 +14,7 @@ const DashboardLayout = () => {
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         
         {/* A. BARRA SUPERIOR */}
-        <DashboardHeader />
+        {/* <DashboardHeader /> */}
 
         {/* B. CONTENIDO DE LA PÁGINA */}
         <main className="flex-1 p-4 lg:p-8 overflow-y-auto overflow-x-hidden">
