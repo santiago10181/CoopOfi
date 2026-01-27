@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import {PageLoader} from "./dashboard/pages/components/PageLoader"
 // Páginas Públicas
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const LoginPage = lazy(() => import("./page_login/LoginPage"));
@@ -11,13 +12,6 @@ const ContentHome = lazy(() => import("./dashboard/pages/Home"));
 const DashboardChatBot = lazy(() => import("./dashboard/pages/chatbot"));
 const DashboardCreditos = lazy(() => import("./dashboard/pages/creditos"));
 const RequestCreditPage = lazy(() => import("./dashboard/pages/creditos/solicitud_credito_form"));
-
-// Loader simple
-const PageLoader = () => (
-  <div className="flex h-screen w-full items-center justify-center">
-    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-yellow-500"></div>
-  </div>
-);
 
 const App = () => {
   return (

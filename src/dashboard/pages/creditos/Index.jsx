@@ -1,5 +1,6 @@
 import { CreditsHeader } from "./header/CreditsHeader";
 import { useNavigate } from "react-router-dom";
+import CreditHistoryTable from "./historial";
 
 const DashboardCreditos = () =>{
 
@@ -9,6 +10,13 @@ const DashboardCreditos = () =>{
         console.log("click");
         
     };
-    return <CreditsHeader onClick=  {handleCreateRequest}/>;
+    return (
+        <>
+            <CreditsHeader onClick=  {handleCreateRequest}/>
+            <CreditHistoryTable />
+        </>
+    
+
+);
 }
 export default DashboardCreditos

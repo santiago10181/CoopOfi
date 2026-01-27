@@ -10,7 +10,7 @@ import { OrigenFondosField } from '../extra_components/OrigenFondosField';
 import { InputFileForm } from '../../../components/InputFileForm';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 
-export const FormSolicitudCredito = () => {
+const FormSolicitudCredito = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const { register, handleSubmit, trigger, formState: { errors, isSubmitting } } = useForm({ 
         mode: 'onChange',
@@ -112,3 +112,4 @@ export const FormSolicitudCredito = () => {
         </div>
     );
 };
+export default FormSolicitudCredito

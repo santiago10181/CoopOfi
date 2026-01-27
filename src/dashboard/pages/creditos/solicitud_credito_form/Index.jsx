@@ -1,16 +1,20 @@
 import { LayoutForms } from "../../components/LayoutForms";
-import { FormSolicitudCredito } from "./forms/FormSolicitudCredito";
+import { lazy, Suspense } from "react";
+import { PageLoader } from "../../components/PageLoader"; // Sin espacios extra
+
+const FormSolicitudCredito = lazy(() => import("./forms/FormSolicitudCredito"));
 
 const FormComplete = () => {
   return (
-    <>
-      <LayoutForms
-        title="Solicitud de Crédito"
-        description="Completa el formulario para solicitar tu crédito"
-      >
+    <LayoutForms
+      title="Solicitud de Crédito"
+      description="Completa el formulario para solicitar tu crédito"
+    >
+      <Suspense fallback={<PageLoader />}>
         <FormSolicitudCredito />
-      </LayoutForms>
-    </>
-    );
+      </Suspense>
+    </LayoutForms>
+  );
 };
+
 export default FormComplete;
