@@ -21,11 +21,11 @@ const App = () => {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Rutas Públicas */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/CoopOfi/" element={<LandingPage />} />
+          <Route path="/CoopOfi/login" element={<LoginPage />} />
 
           {/* Rutas Privadas */}
-          <Route path="/dashboard" element= {<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+          <Route path="/CoopOfi/dashboard" element= {<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
             <Route index element={<ContentHome />} />
             <Route path="chatbot" element={<DashboardChatBot />} />
             <Route path="creditos" element={<DashboardCreditos />} />
@@ -35,7 +35,7 @@ const App = () => {
           </Route>
 
           {/* Redirección 404 */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/CoopOfi/login" replace />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
