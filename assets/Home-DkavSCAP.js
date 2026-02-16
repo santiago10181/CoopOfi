@@ -1,4 +1,4 @@
-import{n as e,u as t}from"./index-Dcb2hg6Q.js";var n=t(e(),1);const r=({children:e,className:t=``})=>(0,n.jsx)(`div`,{className:`
+import{n as e,u as t}from"./index-CKS49gKs.js";var n=t(e(),1);const r=({children:e,className:t=``})=>(0,n.jsx)(`div`,{className:`
         bg-black/5
         rounded-2xl 
         p-6 
