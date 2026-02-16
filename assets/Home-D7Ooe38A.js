@@ -1,0 +1,11 @@
+import{n as e,u as t}from"./index-DqFckbtf.js";var n=t(e(),1);const r=({children:e,className:t=``})=>(0,n.jsx)(`div`,{className:`
+        bg-black/5
+        rounded-2xl 
+        p-6 
+        border border-gray-100 
+        shadow-sm 
+        h-full 
+        transition-shadow duration-300 
+        hover:shadow-md 
+        ${t}
+      `,children:e}),i=({title:e,children:t,variant:i=`default`})=>{let a={primary:`bg-gray-900 text-white border-t-4 border-t-[#FFD500] shadow-xl shadow-gray-200`,active:`bg-white border border-gray-100 border-l-4 border-l-[#FFD500] shadow-sm`,subtle:`bg-gray-50 border border-gray-200 text-gray-600 shadow-none`,default:`bg-white border-gray-200`};return(0,n.jsx)(r,{className:a[i]||a.default,children:(0,n.jsxs)(`div`,{className:`flex flex-col h-full`,children:[(0,n.jsx)(`div`,{className:`mb-4`,children:(0,n.jsx)(`h2`,{className:`text-lg font-bold ${i===`primary`?`text-white`:`text-gray-900`}`,children:e})}),(0,n.jsx)(`div`,{className:`flex-1`,children:t})]})})};var a=()=>(0,n.jsxs)(`div`,{className:`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`,children:[(0,n.jsxs)(i,{title:`Mi Credencial`,variant:`primary`,children:[(0,n.jsx)(`p`,{className:`opacity-90`,children:`Santiago User`}),(0,n.jsx)(`p`,{className:`text-sm opacity-75`,children:`ID: #10181`}),(0,n.jsx)(`div`,{className:`mt-4 inline-block px-2 py-1 bg-white/20 rounded text-xs font-bold`,children:`ACTIVO`})]}),(0,n.jsxs)(i,{title:`En Curso`,variant:`active`,children:[(0,n.jsx)(`p`,{className:`text-gray-600 font-medium`,children:`Crédito de Libranza`}),(0,n.jsxs)(`div`,{className:`mt-3 flex items-center gap-2 text-emerald-600 font-bold bg-emerald-50 p-2 rounded-lg`,children:[(0,n.jsx)(`span`,{className:`animate-pulse`,children:`●`}),` En Estudio`]})]}),(0,n.jsx)(i,{title:`Historial Reciente`,variant:`subtle`,children:(0,n.jsxs)(`ul`,{className:`text-sm space-y-3`,children:[(0,n.jsxs)(`li`,{className:`flex items-center gap-2`,children:[(0,n.jsx)(`span`,{children:`✅`}),` Auxilio Educativo`]}),(0,n.jsxs)(`li`,{className:`flex items-center gap-2 text-gray-400`,children:[(0,n.jsx)(`span`,{children:`⚪`}),` Crédito Vacacional`]})]})})]});export{a as default};

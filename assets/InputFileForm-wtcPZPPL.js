@@ -1,0 +1,20 @@
+import{n as e,u as t}from"./index-DqFckbtf.js";var n=t(e(),1);const r=({label:e,name:t,options:r=[],register:i,error:a,placeholder:o,className:s,...c})=>(0,n.jsxs)(`div`,{className:`w-full group ${s}`,children:[e&&(0,n.jsx)(`label`,{htmlFor:t,className:`block mb-2.5 text-xs font-black text-slate-500 uppercase tracking-widest group-focus-within:text-[#b89b00]`,children:e}),(0,n.jsxs)(`div`,{className:`relative`,children:[(0,n.jsxs)(`select`,{id:t,...i&&i(t),className:`
+            w-full h-[48px] px-5 rounded-2xl text-slate-900 bg-slate-50/50 
+            border-2 appearance-none cursor-pointer transition-all duration-300 outline-none font-semibold text-sm
+            ${a?`border-red-200 bg-red-50/30`:`border-slate-100 hover:border-slate-200 focus:bg-white focus:border-[#FFD700] focus:shadow-xl focus:shadow-yellow-500/10`}
+          `,defaultValue:``,...c,children:[(0,n.jsx)(`option`,{value:``,disabled:!0,children:o||`Seleccione una opción`}),r.map(e=>(0,n.jsx)(`option`,{value:e.value,children:e.label},e.value))]}),(0,n.jsx)(`div`,{className:`absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400`,children:(0,n.jsx)(`svg`,{className:`w-4 h-4`,fill:`none`,stroke:`currentColor`,viewBox:`0 0 24 24`,children:(0,n.jsx)(`path`,{strokeLinecap:`round`,strokeLinejoin:`round`,strokeWidth:`3`,d:`M19 9l-7 7-7-7`})})})]}),a&&(0,n.jsxs)(`p`,{className:`mt-2 text-[11px] font-bold text-red-500 ml-1`,children:[`* `,a.message]})]}),i=({isSubmitting:e})=>(0,n.jsxs)(`button`,{type:`submit`,disabled:e,className:`group relative overflow-hidden bg-slate-900 text-[#FFD700] px-10 py-4 rounded-2xl font-black text-sm uppercase tracking-[0.2em] \r
+                hover:bg-[#FFD700] hover:text-black active:scale-95 transition-all duration-500\r
+                shadow-xl shadow-slate-200 disabled:opacity-50 disabled:cursor-not-allowed`,children:[(0,n.jsx)(`span`,{className:`relative z-10`,children:e?`Procesando...`:`Enviar Solicitud`}),(0,n.jsx)(`div`,{className:`absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-300`})]}),a=({label:e,name:t,register:r,rules:i,error:a,className:o=``,...s})=>(0,n.jsxs)(`div`,{className:`w-full group ${o}`,children:[e&&(0,n.jsx)(`label`,{htmlFor:t,className:`block mb-2.5 text-xs font-black text-slate-500 uppercase tracking-widest`,children:e}),(0,n.jsxs)(`div`,{className:`
+            relative flex flex-col items-center justify-center p-6 rounded-2xl
+            border-2 border-dashed transition-all duration-300 bg-slate-50/30
+            ${a?`border-red-200 bg-red-50`:`border-slate-200 hover:border-[#FFD700] hover:bg-yellow-50/30 group-focus-within:border-[#FFD700]`}
+        `,children:[(0,n.jsx)(`div`,{className:`mb-2 text-slate-400 group-hover:text-[#FFD700] transition-colors`,children:(0,n.jsx)(`svg`,{className:`w-8 h-8`,fill:`none`,stroke:`currentColor`,viewBox:`0 0 24 24`,children:(0,n.jsx)(`path`,{strokeLinecap:`round`,strokeLinejoin:`round`,strokeWidth:`1.5`,d:`M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12`})})}),(0,n.jsx)(`input`,{id:t,type:`file`,...r&&r(t),className:`\r
+                block w-full text-sm text-slate-500 cursor-pointer\r
+                file:mr-4 file:py-2 file:px-6\r
+                file:rounded-full file:border-0\r
+                file:text-xs file:font-black file:uppercase file:tracking-tighter\r
+                file:bg-slate-900 file:text-white\r
+                hover:file:bg-[#FFD700] hover:file:text-black\r
+                file:transition-all file:duration-300\r
+                focus:outline-none\r
+              `,...s}),(0,n.jsx)(`p`,{className:`mt-2 text-[10px] text-slate-400 font-medium`,children:`PDF, JPG o PNG (Máx. 5MB)`})]}),a&&(0,n.jsxs)(`p`,{className:`mt-2 text-[11px] font-bold text-red-500 flex items-center gap-1.5 ml-1`,children:[(0,n.jsx)(`span`,{className:`w-1.5 h-1.5 bg-red-500 rounded-full`}),a.message]})]});export{i as n,r,a as t};
