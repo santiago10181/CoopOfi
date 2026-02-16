@@ -13,7 +13,7 @@ const MENU_ITEMS = [
   { icon: Wallet, label: "Mis Créditos", path: "/CoopOfi/dashboard/creditos" },
   { icon: ArrowLeftRight, label: "Auxilios", path: "/CoopOfi/dashboard/auxilios-convenios" },
   { icon: FileText, label: "Estado de Cuenta", path: "/CoopOfi/dashboard/estado-cuenta" },
-  { icon: FileText, label: "Certificado de renta", path: "/CoopOfi/dashboard" },
+  { icon: FileText, label: "Certificado de renta", path: "/CoopOfi/dashboard/certificado-renta" },
 ];
 
 const Sidebar = () => {

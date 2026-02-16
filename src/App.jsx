@@ -23,7 +23,7 @@ const App = () => {
           {/* Rutas Públicas */}
           {/* <Route path="/CoopOfi/login" element={<LandingPage />} /> */}
           <Route path="/CoopOfi/" element={<LoginPage />} />
-
+    
           {/* Rutas Privadas */}
           <Route path="/CoopOfi/dashboard" element= {<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
             <Route index element={<ContentHome />} />
@@ -32,6 +32,7 @@ const App = () => {
             <Route path="creditos/nueva-solicitud" element={<RequestCreditPage />} />
             <Route path="auxilios-convenios" element={<DashboardAuxConvs />} />
             <Route path="estado-cuenta" element={<DashboardEstadoCuenta />} />
+            <Route path="certificado-renta" element={<h1>En construcción</h1> } />
           </Route>
 
           {/* Redirección 404 */}

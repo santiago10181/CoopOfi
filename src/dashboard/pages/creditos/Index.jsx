@@ -6,7 +6,7 @@ const DashboardCreditos = () =>{
 
     const navigate = useNavigate();
     const handleCreateRequest = () => {
-        navigate('/dashboard/creditos/nueva-solicitud');
+        navigate('/CoopOfi/dashboard/creditos/nueva-solicitud');
         console.log("click");
         
     };
