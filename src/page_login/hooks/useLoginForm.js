@@ -33,7 +33,7 @@ export const useLoginForm = () => {
         
         // Login exitoso con datos simulados
         login(UsuarioPrueba.token, UsuarioPrueba.user);
-        navigate('/dashboard');
+        navigate('/CoopOfi/dashboard');
         return; // Salir aquí, no intentar conexión al servidor
       }
 
