@@ -1,4 +1,4 @@
-export const SelectForm = ({ label, name, options = [], register, rules, error, placeholder, className, ...props }) => {
+export const SelectForm = ({ label, name, options = [], register, error, placeholder, className, ...props }) => {
   return (
     <div className={`w-full group ${className}`}>
       {label && (

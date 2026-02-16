@@ -1,16 +1,49 @@
-// src/pages/login_page/hooks/useLoginForm.js
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { useAuth } from './useAuth';  // ← NUEVO
 
-// src/page_login/hooks/useLoginForm.js
 export const useLoginForm = () => {
   const formMethods = useForm({ mode: "onTouched" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();  // ← NUEVO
 
-  const handleLogin = async (data) => {
-    // Simulamos una petición al servidor de 2 segundos
-    // Esto es lo que obligará al botón a quedarse en "Loading"
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Login exitoso:", data);
+  const handleLogin = useCallback(async (data) => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: data.email,
+          password: data.password 
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        login(result.token, result.user);  // ← CAMBIO: usa useAuth
+        navigate('/dashboard');
+      } else {
+        formMethods.setError('root', { 
+          message: result.error || 'Error en credenciales' 
+        });
+      }
+    } catch (error) {
+      formMethods.setError('root', { 
+        message: 'Error de conexión. Verifica backend.' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formMethods, navigate, login]);  // ← AÑADIR login al array
+
+  return { 
+    ...formMethods, 
+    handleLogin, 
+    isSubmitting 
   };
-
-  return { ...formMethods, handleLogin };
 };

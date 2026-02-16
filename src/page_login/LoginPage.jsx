@@ -35,6 +35,11 @@ const LoginPage = () => {
               error={errors.password}
               register={register("password", { required: "La contraseña es obligatoria" })}
             />
+            {errors.root && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-xl">
+                <p className="text-red-700 text-sm font-medium">{errors.root.message}</p>
+              </div>
+            )}
 
             <PrimaryButton type="submit" isLoading={isSubmitting} icon={ArrowRight}>
               Acceder al portal

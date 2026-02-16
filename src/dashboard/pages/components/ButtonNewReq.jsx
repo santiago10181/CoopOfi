@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react';
-export const ButtonNewReq = ({ onClick }) => {
+export const ButtonNewReq = ({ onClick,title }) => {
     return (
         <button
         onClick={onClick}
@@ -7,7 +7,7 @@ export const ButtonNewReq = ({ onClick }) => {
                    font-bold text-sm hover:bg-[#e6c200] active:scale-95 transition-all 
                    shadow-md shadow-yellow-500/20"
       >
-        <span>Nueva Solicitud</span>
+        <span>{title || 'Nueva Solicitud'}</span>
         <div className="bg-black/10 rounded-full p-1">
             <Plus size={14} strokeWidth={3} />
         </div>
