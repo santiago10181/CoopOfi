@@ -17,7 +17,7 @@ const DashboardEstadoCuenta = lazy(()=> import ("./dashboard/pages/estado_cuenta
 
 const App = () => {
   return (
-    <BrowserRouter basename="/CoopOfi">
+    <BrowserRouter>
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Rutas Públicas */}
