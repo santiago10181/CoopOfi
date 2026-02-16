@@ -21,8 +21,8 @@ const App = () => {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Rutas Públicas */}
-          <Route path="/CoopOfi/login" element={<LandingPage />} />
-          <Route path="/CoopOfi/login" element={<LoginPage />} />
+          {/* <Route path="/CoopOfi/login" element={<LandingPage />} /> */}
+          <Route path="/CoopOfi/" element={<LoginPage />} />
 
           {/* Rutas Privadas */}
           <Route path="/CoopOfi/dashboard" element= {<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
