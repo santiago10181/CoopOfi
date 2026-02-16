@@ -97,7 +97,7 @@ const FormSolicitudCredito = () => {
                     </button>
 
                     {currentStep === totalSteps - 1 ? (
-                        <ButtonSubmitt isSubmitting={isSubmitting} />
+                        <ButtonSubmitt isSubmitting={isSubmitting && (alert("Formulario Enviado"))} />
                     ) : (
                         <button
                             type="button"

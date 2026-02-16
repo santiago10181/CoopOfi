@@ -13,7 +13,7 @@ const MENU_ITEMS = [
   { icon: Wallet, label: "Mis Créditos", path: "/dashboard/creditos" },
   { icon: ArrowLeftRight, label: "Auxilios", path: "/dashboard/auxilios-convenios" },
   { icon: FileText, label: "Estado de Cuenta", path: "/dashboard/estado-cuenta" },
-  { icon: FileText, label: "Certificado de renta", path: "/dashboard/estado-cuenta" },
+  { icon: FileText, label: "Certificado de renta", path: "/dashboard" },
 ];
 
 const Sidebar = () => {

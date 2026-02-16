@@ -11,23 +11,24 @@ import {TextArea} from '../../components/TextArea';
 const CreateAuxilioModal = ({ isOpen, onClose }) => {
   const { register, handleSubmit, watch, setValue, reset, formState: { errors, isSubmitting } } = useForm();
 
-  // 👀 Observamos el campo "type" para saber qué mostrar en el segundo select
-  const selectedType = watch('type');
-  const selectedSubtypeId = watch('subtype');
+  // // 👀 Observamos el campo "type" para saber qué mostrar en el segundo select
+  // const selectedType = watch('type');
+  // const selectedSubtypeId = watch('subtype');
 
-  // Obtenemos la data derivada para mostrar requisitos
-  const currentCategory = selectedType ? AUXILIOS_CONFIG[selectedType] : null;
-  const currentSubtype = currentCategory?.subtypes.find(s => s.id === selectedSubtypeId);
+  // // Obtenemos la data derivada para mostrar requisitos
+  // const currentCategory = selectedType ? AUXILIOS_CONFIG[selectedType] : null;
+  // // const currentSubtype = currentCategory?.subtypes.find(s => s.id === selectedSubtypeId);
 
-  // Resetear el subtipo si cambia el tipo principal
-  useEffect(() => {
-    setValue('subtype', '');
-  }, [selectedType, setValue]);
+  // // Resetear el subtipo si cambia el tipo principal
+  // useEffect(() => {
+  //   setValue('subtype', '');
+  // }, [selectedType, setValue]);
 
   const onSubmit = async (data) => {
     console.log("Datos del formulario:", data);
     // Simular API Call
     await new Promise(resolve => setTimeout(resolve, 1500));
+    alert("Formulario Enviado con éxito");
     reset();
     onClose();
     // Aquí podrías disparar un toast de éxito
@@ -50,31 +51,31 @@ const CreateAuxilioModal = ({ isOpen, onClose }) => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             
             {/* 1. SELECT TIPO (MAESTRO) */}
-            <SelectForm
+            {/* <SelectForm
               label="Tipo de Auxilio"
               name="type"
               options={Object.values(AUXILIOS_CONFIG).map(type => ({ value: type.id, label: type.label }))}
               register={register}
               rules={{ required: "Selecciona un tipo de auxilio" }}
               error={errors.type}
-            />
+            /> */}
 
             {/* 2. SELECT SUBTIPO (DEPENDIENTE) - Animación al aparecer */}
-            {selectedType && (
+            {/* {selectedType && (
               <SelectForm
                 label="Subtipo de Auxilio"
                 name="subtype"
-                options={AUXILIOS_CONFIG[selectedType].subtypes}
+                // options={AUXILIOS_CONFIG[selectedType].subtypes}
                 register={register}
                 rules={{ required: "Selecciona un subtipo" }}
                 error={errors.subtype}
               />
-            )}
+            )} */}
 
             {/* INFO BOX: REQUISITOS (Dinámico) */}
-            {currentSubtype && (
+            {/* {currentSubtype && (
               <InfoReq currentSubtype={currentSubtype} />
-            )}
+            )} */}
 
             {/* 3. DESCRIPCIÓN */}
             <TextArea

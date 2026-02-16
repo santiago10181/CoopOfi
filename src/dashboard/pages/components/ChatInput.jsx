@@ -32,6 +32,7 @@ export const ChatInput = () => {
         
         <button 
           type="submit"
+          onClick={()=>alert("Función aún no activada")}
           disabled={!isValid}
           className={`
             p-2 rounded-full transition-all duration-200 flex items-center justify-center
