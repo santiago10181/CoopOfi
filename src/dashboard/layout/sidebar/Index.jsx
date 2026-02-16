@@ -8,12 +8,12 @@ import {
 } from "lucide-react";
 
 const MENU_ITEMS = [
-  { icon: LayoutDashboard, label: "Resumen", path: "/dashboard" },
-  { icon: Bot, label: "Chatbot", path: "/dashboard/chatbot" },
-  { icon: Wallet, label: "Mis Créditos", path: "/dashboard/creditos" },
-  { icon: ArrowLeftRight, label: "Auxilios", path: "/dashboard/auxilios-convenios" },
-  { icon: FileText, label: "Estado de Cuenta", path: "/dashboard/estado-cuenta" },
-  { icon: FileText, label: "Certificado de renta", path: "/dashboard" },
+  { icon: LayoutDashboard, label: "Resumen", path: "CoopOfi/dashboard" },
+  { icon: Bot, label: "Chatbot", path: "CoopOfi/dashboard/chatbot" },
+  { icon: Wallet, label: "Mis Créditos", path: "CoopOfi/dashboard/creditos" },
+  { icon: ArrowLeftRight, label: "Auxilios", path: "CoopOfi/dashboard/auxilios-convenios" },
+  { icon: FileText, label: "Estado de Cuenta", path: "CoopOfi/dashboard/estado-cuenta" },
+  { icon: FileText, label: "Certificado de renta", path: "CoopOfi/dashboard/certificado-renta" },
 ];
 
 const Sidebar = () => {
