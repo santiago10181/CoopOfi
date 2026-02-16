@@ -4,7 +4,7 @@ export const SidebarItem = ({ item, onClick }) => {
   return (
     <NavLink
       to={item.path}
-      end={item.path === "/dashboard"}
+      end={item.path === "/CoopOfi/dashboard"}
       onClick={onClick}
       className={({ isActive }) => `
         group flex items-center gap-4 px-6 py-4 rounded-[20px] font-bold transition-all duration-200
