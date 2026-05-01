@@ -10,14 +10,14 @@ export const infoComplementariaFields = {
       name: "sol_dir_casa",
       type: "text",
       defaultValue: "CRA 11 # 11-11",
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'select',
       label: "Ciudad de Residencia",
       name: "sol_ciudad_casa",
       options: ciudadesOptions,
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'select',
@@ -31,14 +31,14 @@ export const infoComplementariaFields = {
         { value: "5", label: "Separado" },
         { value: "6", label: "Viudo" }
       ],
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
       label: "No. Hijos",
       name: "sol_num_hijos",
       type: "number",
-      rules: { required: "Requerido", min: 0 }
+      // rules: { required: "Requerido", min: 0 }
     },
     {
       componentType: 'input',
@@ -46,7 +46,7 @@ export const infoComplementariaFields = {
       name: "sol_personas_cargo",
       type: "number",
       defaultValue: 0,
-      rules: { required: "Requerido", min: 0 }
+      // rules: { required: "Requerido", min: 0 }
     },
     {
       componentType: 'input',
@@ -70,21 +70,23 @@ export const infoComplementariaFields = {
       name: "sol_estrato",
       type: "number",
       defaultValue: 6,
-      rules: { required: "Requerido", min: 0, max: 6 }
+      // rules: { required: "Requerido", min: 0, max: 6 }
     },
     {
       componentType: 'input',
       label: "Celular",
       name: "sol_celular",
       type: "number",
-      rules: { required: "Requerido" }
+      readOnly: true
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
       label: "Correo Electrónico Personal",
       name: "sol_email",
       type: "email",
-      rules: { required: "Requerido" }
+      readOnly: true
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'select',
@@ -94,7 +96,7 @@ export const infoComplementariaFields = {
         { value: "F", label: "Física" },
         { value: "E", label: "Email" }
       ],
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     }
   ]
 };

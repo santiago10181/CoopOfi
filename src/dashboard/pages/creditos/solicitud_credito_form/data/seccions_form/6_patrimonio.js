@@ -3,6 +3,7 @@ export const patrimonioFields = {
   sectionTitle: "PATRIMONIO (INMUEBLES Y VEHÍCULOS)",
   fields: [
     // INMUEBLES
+    { componentType: 'divider', label: 'Inmuebles' },
     { componentType: 'input', label: "Tipo de Inmueble", name: "sol_tipo_inm", type: "text" },
     { componentType: 'input', label: "Dirección", name: "sol_dir_inm", type: "text" },
     { componentType: 'input', label: "Ciudad", name: "sol_ciudad_inm", type: "text" },
@@ -13,6 +14,7 @@ export const patrimonioFields = {
     { componentType: 'input', label: "Entidad Hipoteca", name: "sol_entidad_hipot_inm", type: "text" },
 
     // VEHICULOS
+    { componentType: 'divider', label: 'Vehículos' },
     { componentType: 'input', label: "Placa", name: "sol_placa_vehiculo", type: "text" },
     { componentType: 'input', label: "Tipo Vehículo", name: "sol_tipo_vehiculo", type: "text" },
     { componentType: 'input', label: "Marca", name: "sol_marca_vehiculo", type: "text" },

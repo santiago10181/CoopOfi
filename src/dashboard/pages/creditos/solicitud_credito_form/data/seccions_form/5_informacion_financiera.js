@@ -3,26 +3,27 @@ export const infoFinancieraFields = {
   sectionTitle: "INFORMACIÓN FINANCIERA",
   fields: [
     // INGRESOS
+    { componentType: 'divider', label: 'Ingresos Mensuales' },
     {
       componentType: 'input',
       label: "Salarios",
       name: "sol_salario",
       type: "text",
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
       label: "Comisiones/Prima Téc./Auxilios",
       name: "sol_honorarios",
       type: "text",
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
       label: "Otros Ingresos",
       name: "sol_otros_ingresos",
       type: "text",
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
@@ -38,26 +39,27 @@ export const infoFinancieraFields = {
       readOnly: true
     },
     // EGRESOS
+    { componentType: 'divider', label: 'Egresos Mensuales' },
     {
       componentType: 'input',
       label: "Gastos Familiares",
       name: "sol_gasto_familia",
       type: "text",
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
       label: "Gastos Financieros",
       name: "sol_gasto_financiero",
       type: "text",
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
       label: "Otros Gastos",
       name: "sol_otros_gastos",
       type: "text",
-      rules: { required: "Requerido" }
+      // rules: { required: "Requerido" }
     },
     {
       componentType: 'input',

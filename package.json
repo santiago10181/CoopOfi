@@ -21,11 +21,14 @@
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.554.0",
     "morgan": "^1.10.1",
+    "nodemon": "^3.1.11",
+    "pdfkit": "^0.17.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.0",
     "react-router-dom": "^7.12.0",
     "tailwindcss": "^4.1.17",
+    "uuid": "^13.0.0",
     "zustand": "^5.0.10"
   },
   "devDependencies": {

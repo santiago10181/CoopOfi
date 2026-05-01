@@ -23,16 +23,7 @@ app.use(express.json({ limit: '10kb' })); // Body parser seguro
 
 // 📡 RUTAS (públicas primero, protegidas después)
 // LoginRoute ya tiene sus propias rutas protegidas
-app.use('/api/auth', routes);
-
-// ✅ Ruta de prueba (pública)
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    authEndpoints: ['/api/auth/login', '/api/auth/profile']
-  });
-});
+app.use('/api/', routes);
 
 // 🚫 404 Handler
 app.use((req, res, next) => {
@@ -46,7 +37,4 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server: http://localhost:${PORT}`);
-  console.log(`📱 Login: POST /api/auth/login`);
-  console.log(`🔒 Profile: GET /api/auth/profile (Bearer token)`);
-  console.log(`❤️ Health: GET /health`);
 });

@@ -7,22 +7,22 @@ export const garantiasOptions = [
 ];
 
 export const lineasCreditoOptions = [
-  { value: "1", label: "CREDITO LIBRE INVERSION" },
-  { value: "2", label: "VEHICULO" },
-  { value: "3", label: "CREDITO APORTES" },
-  { value: "4", label: "COMPRA CARTERA" },
-  { value: "5", label: "IMPUESTOS" },
-  { value: "6", label: "CREDITO EDUCATIVO - PREGRADO" },
-  { value: "7", label: "CREDITO EDUCATIVO - POSTGRADO" },
-  { value: "8", label: "CREDITO EXPRESS" },
-  { value: "9", label: "ANTICIPO DE PRIMA" },
-  { value: "10", label: "TARJETA GES" },
-  { value: "11", label: "POLIZAS Y SOAT" },
-  { value: "12", label: "CREDITO CONVENIO" },
-  { value: "13", label: "OPTICO" },
-  { value: "14", label: "CREDITO TECNOLOGIA Y ELECTRODOMESTICOS" },
-  { value: "15", label: "CREDITO GIMANASIO" },
-  { value: "18", label: "CREDITO DE BIENVENIDA" }
+  { value: "CREDITO LIBRE INVERSION", label: "CREDITO LIBRE INVERSION" },
+  { value: "VEHICULO", label: "VEHICULO" },
+  { value: "CREDITO APORTES", label: "CREDITO APORTES" },
+  { value: "COMPRA CARTERA", label: "COMPRA CARTERA" },
+  { value: "IMPUESTOS", label: "IMPUESTOS" },
+  { value: "CREDITO EDUCATIVO - PREGRADO", label: "CREDITO EDUCATIVO - PREGRADO" },
+  { value: "CREDITO EDUCATIVO - POSTGRADO", label: "CREDITO EDUCATIVO - POSTGRADO" },
+  { value: "CREDITO EXPRESS", label: "CREDITO EXPRESS" },
+  { value: "ANTICIPO DE PRIMA", label: "ANTICIPO DE PRIMA" },
+  { value: "TARJETA GES", label: "TARJETA GES" },
+  { value: "POLIZAS Y SOAT", label: "POLIZAS Y SOAT" },
+  { value: "CREDITO CONVENIO", label: "CREDITO CONVENIO" },
+  { value: "OPTICO", label: "OPTICO" },
+  { value: "CREDITO TECNOLOGIA Y ELECTRODOMESTICOS", label: "CREDITO TECNOLOGIA Y ELECTRODOMESTICOS" },
+  { value: "CREDITO GIMANASIO", label: "CREDITO GIMANASIO" }, // Nota: Mantuve tu ortografía original aquí
+  { value: "CREDITO DE BIENVENIDA", label: "CREDITO DE BIENVENIDA" }
 ];
 
 // He resumido la lista de ciudades para el ejemplo, pero aquí iría todo el listado extraído

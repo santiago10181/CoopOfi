@@ -13,12 +13,8 @@ const loginHandler = async (req, res) => {
   }
 
   try {
-
-    // Simula búsqueda en DB
      
     const user = usuarios.find(u => u.email === email);
-    // const user = getHashedUsers().find(u => u.email === email);
-    
     
     if (!user) {
       return res.status(401).json({ error: 'Credenciales inválidas email' });
@@ -28,14 +24,13 @@ const loginHandler = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ error: 'Credenciales inválidas pass' });
     }
-    console.log(user);
     
     // JWT con tu config
     const token = jwt.sign(
       { 
         userId: user.id, 
         username: user.username,
-        email: user.email || '' // Si tienes email
+        rol: user.rol
       },
       config.jwtSecret, // ← De tu config.js
       { expiresIn: config.jwtExpiresIn || '1h' }
@@ -44,11 +39,11 @@ const loginHandler = async (req, res) => {
     res.json({
       message: 'Login exitoso',
       token,
-      user: {id: user.id, username: user.username, email: user.email,rol:user.rol} // No envíes el hash al cliente
+      user: {id: user.id, username: user.username, email: user.email,rol:user.rol} 
     });
   } catch (err) {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
-};
+}
 
 export default loginHandler;

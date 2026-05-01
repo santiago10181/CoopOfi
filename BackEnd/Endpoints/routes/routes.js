@@ -3,6 +3,8 @@ import loginHandler from '../Fun_End/login.js'; // ← Tu handler corregido
 import { loginRateLimiter } from '../../Auth/rateLimit.js'; // ← Tu rateLimit
 import DashboardHandler from '../Fun_End/DashboardHandler.js';
 import { authenticateJWT } from '../../Auth/midlewareLogin.js'; // ← Tu middleware
+import CreditosHandler from '../Fun_End/CreditosHandler.js'; // ← NUEVO
+import NuevaSolicitudCreditoHandler from '../Fun_End/NuevaSolicitudCreditoHandler.js'; // ← NUEVO
 
 const router = express.Router();
 
@@ -13,6 +15,8 @@ router.post('/login', loginRateLimiter, loginHandler);
 
 router.get('/dashboard', authenticateJWT, DashboardHandler); // ← Tu handler de dashboard protegido
 // ✅ Privada: Logout (invalidar client-side)
+router.get('/creditos',  authenticateJWT,  CreditosHandler); // ← NUEVO
+router.post('/creditos/nueva-solicitud', authenticateJWT,  NuevaSolicitudCreditoHandler); 
 router.post('/logout', (req, res) => {
   res.json({ message: 'Token descartado client-side. Login nuevamente.' });
 });

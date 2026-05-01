@@ -3,32 +3,35 @@ export const referenciasFields = {
   sectionTitle: "REFERENCIAS Y CÓNYUGE",
   fields: [
     // REFERENCIA PERSONAL
-    { componentType: 'input', label: "Ref. Personal - Nombre", name: "sol_refp_nombre", type: "text", rules: { required: "Requerido" } },
-    { componentType: 'input', label: "Ref. Personal - Teléfono", name: "sol_refp_telefono", type: "number", rules: { required: "Requerido" } },
+    { componentType: 'divider', label: 'Referencia Personal' },
+    { componentType: 'input', label: "Ref. Personal - Nombre", name: "sol_refp_nombre", type: "text",  },
+    { componentType: 'input', label: "Ref. Personal - Teléfono", name: "sol_refp_telefono", type: "number",  },
     { 
       componentType: 'select', 
       label: "Ref. Personal - Parentesco", 
       name: "sol_refp_parentesco", 
       options: [{value: "0", label: "Ninguno"}, {value: "2", label: "Hermano"}, {value: "3", label: "Hijo"}, {value: "4", label: "Madre"}, {value: "5", label: "Padre"}], 
-      rules: { required: "Requerido" } 
+      
     },
-    { componentType: 'input', label: "Ref. Personal - Ciudad", name: "sol_refp_ciudad", type: "text", rules: { required: "Requerido" } },
-    { componentType: 'input', label: "Ref. Personal - Dirección", name: "sol_refp_direccion", type: "text", rules: { required: "Requerido" } },
+    { componentType: 'input', label: "Ref. Personal - Ciudad", name: "sol_refp_ciudad", type: "text",  },
+    { componentType: 'input', label: "Ref. Personal - Dirección", name: "sol_refp_direccion", type: "text",  },
 
     // REFERENCIA FAMILIAR
-    { componentType: 'input', label: "Ref. Familiar - Nombre", name: "sol_reff_nombre", type: "text", rules: { required: "Requerido" } },
-    { componentType: 'input', label: "Ref. Familiar - Teléfono", name: "sol_reff_telefono", type: "number", rules: { required: "Requerido" } },
+    { componentType: 'divider', label: 'Referencia Familiar' },
+    { componentType: 'input', label: "Ref. Familiar - Nombre", name: "sol_reff_nombre", type: "text",  },
+    { componentType: 'input', label: "Ref. Familiar - Teléfono", name: "sol_reff_telefono", type: "number",  },
     { 
       componentType: 'select', 
       label: "Ref. Familiar - Parentesco", 
       name: "sol_reff_parentesco", 
       options: [{value: "0", label: "Ninguno"}, {value: "2", label: "Hermano"}, {value: "3", label: "Hijo"}, {value: "4", label: "Madre"}, {value: "5", label: "Padre"}], 
-      rules: { required: "Requerido" } 
+       
     },
-    { componentType: 'input', label: "Ref. Familiar - Ciudad", name: "sol_reff_ciudad", type: "text", rules: { required: "Requerido" } },
-    { componentType: 'input', label: "Ref. Familiar - Dirección", name: "sol_reff_direccion", type: "text", rules: { required: "Requerido" } },
+    { componentType: 'input', label: "Ref. Familiar - Ciudad", name: "sol_reff_ciudad", type: "text",  },
+    { componentType: 'input', label: "Ref. Familiar - Dirección", name: "sol_reff_direccion", type: "text",  },
 
     // CÓNYUGE
+    { componentType: 'divider', label: 'Cónyuge / Compañero(a)' },
     {
       componentType: 'select',
       label: "Cónyuge - Tipo Doc",

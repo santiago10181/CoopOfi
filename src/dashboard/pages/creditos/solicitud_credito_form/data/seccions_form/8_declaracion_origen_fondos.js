@@ -8,7 +8,7 @@ export const declaracionFields = {
       name: "sol_origen_fondos",
       type: "text",
       placeholder: "Ingrese una descripción breve",
-      rules: { required: "Requerido" },
+      // rules: { required: "Requerido" },
       className: "md:col-span-2"
     },
     {
@@ -16,7 +16,7 @@ export const declaracionFields = {
       label: "Archivos adjuntos (PDF, JPG, JPEG)",
       name: "archivo_adjunto",
       type: "file",
-      rules: { required: "Requerido" },
+      // rules: { required: "Requerido" },
       className: "md:col-span-2"
     }
   ]
