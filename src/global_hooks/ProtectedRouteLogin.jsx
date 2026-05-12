@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../page_login/hooks/useAuth';
+import { useAuth } from './UserContext';
 import {PageLoader} from '../dashboard/pages/components/PageLoader';
 
 export const ProtectedRoute = ({ children }) => {
@@ -16,6 +16,6 @@ export const ProtectedRoute = ({ children }) => {
   if (isAuthenticated) {
     return children;  // ✅ Muestra página protegida
   } else {
-    return <Navigate to="/login" replace />;  // ❌ Redirige login
+    return <Navigate to="/CoopOfi/" replace />;  // ❌ Redirige login
   }
 };

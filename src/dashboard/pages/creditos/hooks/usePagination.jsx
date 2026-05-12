@@ -10,7 +10,7 @@ export const usePagination = (data, itemsPerPage = 5) => {
     // 3. Preparamos los datos (Invertir para ver lo más reciente primero)
     // useMemo evita que se recalcule si no cambian los datos originales
     const sortedData = useMemo(() => {
-        return [...safeData].reverse();
+        return [...safeData];
     }, [safeData]);
 
     // 4. LÓGICA INFALIBLE:

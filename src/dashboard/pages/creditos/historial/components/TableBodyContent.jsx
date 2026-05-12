@@ -9,7 +9,7 @@ export const TableBodyContent = ({Id, Fecha, Tipo, Valor, Plazo, children}) => {
             className="hover:bg-yellow-50/30 transition-colors duration-150 group"
         >
             {/* ID & FECHA */}
-            <TableBodyData main={Id} complement={Fecha} />
+            <TableBodyData main={Fecha} complement={Id} />
 
             {/* TIPO */}
             <TableBodyData main={Tipo} >

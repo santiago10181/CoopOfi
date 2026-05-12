@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
 
-export const useCreditos = () => {
-  const [creditos, setCreditos] = useState([]);
+export const useAuxilios = () => {
+  const [auxilios, setAuxilios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  
+  // 👉 NUEVO 1: Estado para disparar la recarga
+  const [reloadTrigger, setReloadTrigger] = useState(false); 
+
+  // 👉 NUEVO 2: Función que cambia el trigger para forzar el useEffect
+  const refetch = () => setReloadTrigger(prev => !prev);
 
   useEffect(() => {
     let isMounted = true;
 
-    const fetchCreditos = async () => {
+    const fetchAuxilios = async () => {
+      // Opcional: setLoading(true) aquí para que se vea que recarga
       try {
         const token = localStorage.getItem('token');
 
@@ -17,7 +24,7 @@ export const useCreditos = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:3000/api/creditos', {
+        const response = await fetch('http://localhost:3000/api/auxilios', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -30,10 +37,10 @@ export const useCreditos = () => {
         if (!isMounted) return;
 
         if (response.ok) {
-          setCreditos(result.prestamos ?? []);
+          setAuxilios(result.auxilios ?? []);
           setError('');
         } else {
-          setError(result.error || 'Error al cargar créditos');
+          setError(result.error || 'Error al cargar auxilios');
         }
       } catch (err) {
         if (isMounted) {
@@ -46,12 +53,12 @@ export const useCreditos = () => {
       }
     };
 
-    fetchCreditos();
+    fetchAuxilios();
 
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [reloadTrigger]); // 👉 NUEVO 3: Agregamos reloadTrigger a las dependencias
 
-  return { creditos, loading, error };
+  return { auxilios, loading, error, refetch }; 
 };

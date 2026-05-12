@@ -17,12 +17,12 @@ const loginHandler = async (req, res) => {
     const user = usuarios.find(u => u.email === email);
     
     if (!user) {
-      return res.status(401).json({ error: 'Credenciales inválidas email' });
+      return res.status(401).json({ error: 'Credenciales inválidas' });
     }
 
     const isMatch = await comparePassword(password, user.password_hash);
     if (!isMatch) {
-      return res.status(401).json({ error: 'Credenciales inválidas pass' });
+      return res.status(401).json({ error: 'Credenciales inválidas' });
     }
     
     // JWT con tu config

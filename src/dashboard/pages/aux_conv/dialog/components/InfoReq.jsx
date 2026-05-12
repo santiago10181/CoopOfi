@@ -5,7 +5,7 @@ export const InfoReq = ({ currentSubtype }) => {
             <Info className="text-blue-600 shrink-0 mt-0.5" size={20} />
             <div>
                <h4 className="text-sm font-bold text-blue-900">Requisito Obligatorio</h4>
-              <p className="text-sm text-blue-700 mt-0.5">{currentSubtype.req}</p>
+              <p className="text-sm text-blue-700 mt-0.5">{currentSubtype?.req}</p>
             </div>
         </div>
     );

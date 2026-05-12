@@ -1,9 +1,9 @@
 // dashboard/hooks/useAutoFillFormFromUser.js
 import { useEffect } from "react";
-import { useDashboardContext } from "../../../../global_hooks/UserContext";
+import { useDashboard } from "../../../../global_hooks/useDashboard";
 
 export const useAutoFillFormFromUser = (reset, index) => {
-  const { userData } = useDashboardContext();
+  const { userData } = useDashboard();
 
   useEffect(() => {
     // Si no hay userData, no llenamos el formulario

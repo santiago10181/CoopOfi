@@ -1,8 +1,8 @@
 // dashboard/layout/DashboardLayout.jsx
 import { Outlet }           from 'react-router-dom';
 import Sidebar              from './sidebar';
-import { DashboardContext } from '../../global_hooks/UserContext';
-import { useDashboard }     from './hooks/useDashboard'; // Nuevo hook para cargar userData al entrar al dashboard
+import { DashboardContext } from '../../global_hooks/DashboardContext';
+import { useDashboard }     from '../../global_hooks/useDashboard'; // Nuevo hook para cargar userData al entrar al dashboard
 
 const DashboardLayout = () => {
   // ✅ Se llama UNA SOLA VEZ al entrar al dashboard

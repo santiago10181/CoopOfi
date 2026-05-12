@@ -4,7 +4,9 @@ import { loginRateLimiter } from '../../Auth/rateLimit.js'; // ← Tu rateLimit
 import DashboardHandler from '../Fun_End/DashboardHandler.js';
 import { authenticateJWT } from '../../Auth/midlewareLogin.js'; // ← Tu middleware
 import CreditosHandler from '../Fun_End/CreditosHandler.js'; // ← NUEVO
-import NuevaSolicitudCreditoHandler from '../Fun_End/NuevaSolicitudCreditoHandler.js'; // ← NUEVO
+import NuevaSolicitudCreditoHandler from '../Fun_End/NuevaSolicitudCreditoHandler.js';
+import AuxiliosHandler from '../Fun_End/AuxiliosHandles.js';// ← NUEVO
+import NuevaSolicitudAuxilioHandler from '../Fun_End/NuevaSolicitudAuxilio.js'; // ← NUEVO
 
 const router = express.Router();
 
@@ -17,6 +19,8 @@ router.get('/dashboard', authenticateJWT, DashboardHandler); // ← Tu handler d
 // ✅ Privada: Logout (invalidar client-side)
 router.get('/creditos',  authenticateJWT,  CreditosHandler); // ← NUEVO
 router.post('/creditos/nueva-solicitud', authenticateJWT,  NuevaSolicitudCreditoHandler); 
+router.get('/auxilios', authenticateJWT,AuxiliosHandler)
+router.post('/auxilios/nueva-solicitud', authenticateJWT, NuevaSolicitudAuxilioHandler); // Reutilizamos el mismo handler para simplicidad, pero podrías hacer uno específico para auxilios si quieres
 router.post('/logout', (req, res) => {
   res.json({ message: 'Token descartado client-side. Login nuevamente.' });
 });

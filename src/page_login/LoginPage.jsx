@@ -6,7 +6,12 @@ import { PrimaryButton } from "./components/ui/PrimaryButton";
 import { LoginBanner } from "./components/LoginBanner";
 
 const LoginPage = () => {
-  const { register, handleSubmit, handleLogin, formState: { errors, isSubmitting } } = useLoginForm();
+  const {
+    register,
+    handleSubmit,
+    handleLogin,
+    formState: { errors, isSubmitting },
+  } = useLoginForm();
 
   return (
     <div className="flex min-h-screen">
@@ -15,28 +20,45 @@ const LoginPage = () => {
       <main className="w-full lg:w-1/2 flex items-center justify-center p-6 bg-white">
         <section className="w-full max-w-md">
           <header className="mb-10 text-center lg:text-left">
-            <h2 className="text-4xl font-extrabold text-gray-900">Ingresa ahora</h2>
+            <h1 className="text-4xl font-extrabold text-gray-900">Ingresa ahora</h1>
             <p className="text-gray-500 mt-2 font-medium">Bienvenido de nuevo, asociado.</p>
           </header>
 
-          <form onSubmit={handleSubmit(handleLogin)} className="space-y-6">
+          <form onSubmit={handleSubmit(handleLogin)} className="space-y-6" noValidate>
             <AuthInput
+              id="email"
               label="Correo electrónico"
               type="email"
+              autoComplete="email"
               icon={Mail}
               error={errors.email}
-              register={register("email", { required: "El correo es obligatorio" })}
+              register={register("email", {
+                required: "El correo es obligatorio",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Ingresa un correo válido",
+                },
+              })}
             />
 
             <AuthInput
+              id="password"
               label="Contraseña"
               type="password"
+              autoComplete="current-password"
               icon={Lock}
               error={errors.password}
-              register={register("password", { required: "La contraseña es obligatoria" })}
+              register={register("password", {
+                required: "La contraseña es obligatoria",
+                minLength: {
+                  value: 6,
+                  message: "La contraseña debe tener al menos 6 caracteres",
+                },
+              })}
             />
+
             {errors.root && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-xl">
+              <div className="p-4 bg-red-50 border border-red-200 rounded-xl" role="alert">
                 <p className="text-red-700 text-sm font-medium">{errors.root.message}</p>
               </div>
             )}

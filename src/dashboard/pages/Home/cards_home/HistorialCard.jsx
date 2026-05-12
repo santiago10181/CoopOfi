@@ -10,7 +10,7 @@ const iconPorEstado = {
 };
 
 export const HistorialCard = ({ prestamos }) => {
-
+ 
   return (
     <CardsHome title="Historial Reciente" variant="subtle">
       <ul className="text-sm space-y-3">

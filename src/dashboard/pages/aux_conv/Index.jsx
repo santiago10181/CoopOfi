@@ -1,23 +1,31 @@
 import { useState } from "react";
 import { AuxConvsHeader } from "./Header/AuxConvsHeader";
 import AuxConvsHistory from "./historial";
-import CreateAuxilioModal from "./dialog"; // 👈 Asegúrate de la ruta correcta
+import CreateAuxilioModal from "./dialog";
+import { useAuxilios } from "./hooks/useAuxilios";
+// Eliminamos la importación de useSubmitForm aquí. No le pertenece al padre.
 
 const DashboardAuxConvs = () => {
-    // 1. Estado para controlar si el modal se ve o no
+    const { auxilios, loading, error, refetch } = useAuxilios();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    // Esta función se la pasaremos al Modal para que la llame SOLO cuando haya terminado con éxito
+    const handleSuccess = () => {
+        setIsModalOpen(false); // Cierra el modal
+        refetch(); // Recarga la tabla
+    };
+    
     return (
         <>
-            {/* 2. Pasamos la función para abrir al Header */}
             <AuxConvsHeader onOpenModal={() => setIsModalOpen(true)} />
             
-            <AuxConvsHistory />
+            
+            <AuxConvsHistory data={auxilios} loading={loading} error={error} />
 
-            {/* 3. Renderizamos el Modal condicionado al estado */}
             <CreateAuxilioModal 
                 isOpen={isModalOpen} 
                 onClose={() => setIsModalOpen(false)} 
+                onSuccess={handleSuccess} 
             />
         </>
     );

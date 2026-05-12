@@ -1,5 +1,5 @@
 // ✅ Ya NO importa useDashboard (eso vive en el Layout ahora)
-import { useDashboardContext } from "../../../global_hooks/UserContext";
+import { useDashboardContext } from "../../../global_hooks/DashboardContext";
 import { CredencialCard } from "./cards_home/CredencialCard";
 import { PerfilCard }     from "./cards_home/PerfilCard";
 import { AccesosCard }    from "./cards_home/AccesosCard";

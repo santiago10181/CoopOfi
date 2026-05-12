@@ -14,14 +14,6 @@ export const useSubmitForm = () => {
   const onSubmit = async (data) => {
     try {
       const token = localStorage.getItem("token");
-
-      // ── Modo demo ──────────────────────────────────────────
-      if (token === "demo-token-123456789") {
-        await new Promise((r) => setTimeout(r, 1200));
-        setModalStatus("success");
-        return;
-      }
-
       // ── Fetch real ─────────────────────────────────────────
       const response = await fetch(
         "http://localhost:3000/api/creditos/nueva-solicitud",

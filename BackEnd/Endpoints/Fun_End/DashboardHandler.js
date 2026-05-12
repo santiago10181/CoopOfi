@@ -10,7 +10,7 @@ const DashboardHandler = (req, res) => {
   }
 
   const prestamos = getPrestamosByUserId(userId) ?? [];
-  const prestamosRecientes = prestamos
+  const prestamosRecientes = [...prestamos]
     .sort((a, b) => new Date(b.fecha_solicitud) - new Date(a.fecha_solicitud))
     .slice(0, 3);
 

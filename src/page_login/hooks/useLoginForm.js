@@ -1,51 +1,48 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useState, useCallback } from "react";
-import { useAuth } from './useAuth';
-
+import { useCallback } from "react";
+import  {useAuth}  from '../../global_hooks/UserContext';
 
 export const useLoginForm = () => {
   const formMethods = useForm({ mode: "onTouched" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleLogin = useCallback(async (data) => {
-    setIsSubmitting(true);
+    formMethods.clearErrors("root");
 
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
+      const response = await fetch(`http://localhost:3000/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           email: data.email,
-          password: data.password 
-        })
+          password: data.password,
+        }),
       });
 
       const result = await response.json();
 
-      if (response.ok) {
-        login(result.token, result.user);
-        navigate('/CoopOfi/dashboard');
-      } else {
-        formMethods.setError('root', { 
-          message: result.error || 'Error en credenciales' 
+      if (!response.ok) {
+        formMethods.setError("root", {
+          type: "server",
+          message: result.error || "Error en credenciales",
         });
+        return;
       }
+
+      login(result.token, result.user);
+      navigate("/CoopOfi/dashboard", { replace: true });
     } catch (error) {
-      formMethods.setError('root', { 
-        message: 'Error de conexión. Usa el usuario de prueba: user@coopoficina.com' 
+      formMethods.setError("root", {
+        type: "fetch",
+        message: "Error de conexión. Intenta de nuevo.",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   }, [formMethods, navigate, login]);
 
-
-  return { 
-    ...formMethods, 
-    handleLogin, 
-    isSubmitting 
+  return {
+    ...formMethods,
+    handleLogin,
   };
 };

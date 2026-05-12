@@ -15,7 +15,7 @@ const currencyFormatter = new Intl.NumberFormat('es-CO', {
 const CreditHistoryTable = ({ creditos = [] }) => {
 
   const creditosOrdenados = [...creditos]
-    .sort((b, a) => new Date(b.fecha_solicitud) - new Date(a.fecha_solicitud));
+
 
   const { page, totalPages, currentData, handlePrev, handleNext } = usePagination(creditosOrdenados, 5);
 
