@@ -6,7 +6,8 @@ import { authenticateJWT } from '../../Auth/midlewareLogin.js'; // ← Tu middle
 import CreditosHandler from '../Fun_End/CreditosHandler.js'; // ← NUEVO
 import NuevaSolicitudCreditoHandler from '../Fun_End/NuevaSolicitudCreditoHandler.js';
 import AuxiliosHandler from '../Fun_End/AuxiliosHandles.js';// ← NUEVO
-import NuevaSolicitudAuxilioHandler from '../Fun_End/NuevaSolicitudAuxilio.js'; // ← NUEVO
+import NuevaSolicitudAuxilioHandler from '../Fun_End/NuevaSolicitudAuxilio.js';
+import {DatosCreditosMockHandler}  from '../Fun_End/Data_creditos.js'; // ← NUEVO
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.post('/auxilios/nueva-solicitud', authenticateJWT, NuevaSolicitudAuxilioH
 router.post('/logout', (req, res) => {
   res.json({ message: 'Token descartado client-side. Login nuevamente.' });
 });
+router.get('/data-creditos', DatosCreditosMockHandler); // Endpoint de mock para créditos
 
 export default router; // ← Export completo

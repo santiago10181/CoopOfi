@@ -18,8 +18,8 @@ const ContentHome = () => {
             <div className="lg:col-span-2"><CredencialCard user={userData} /></div>
             <PerfilCard user={userData} />
             <AccesosCard />
-            <EnCursoCard    prestamos={userData.prestamos} />
-            <HistorialCard  prestamos={userData.prestamos} />
+            <EnCursoCard    prestamos={[]} />
+            <HistorialCard  prestamos={[]} />
         </div>
     );
 };

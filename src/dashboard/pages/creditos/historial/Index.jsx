@@ -12,12 +12,26 @@ const currencyFormatter = new Intl.NumberFormat('es-CO', {
   minimumFractionDigits: 0
 });
 
+const dateFormatter = new Intl.DateTimeFormat('es-CO', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+});
+
 const CreditHistoryTable = ({ creditos = [] }) => {
-
   const creditosOrdenados = [...creditos]
+    .map(({ id, fecha_solicitud, detalle_credito, valor, plazo_meses, estado }) => ({
+      id,
+      fecha_solicitud,
+      tipo_credito: detalle_credito,
+      monto_solicitado: Number(valor),
+      plazo_meses,
+      estado,
+    }))
+    .sort((a, b) => new Date(b.fecha_solicitud) - new Date(a.fecha_solicitud));
 
-
-  const { page, totalPages, currentData, handlePrev, handleNext } = usePagination(creditosOrdenados, 5);
+  const { page, totalPages, currentData, handlePrev, handleNext } =
+    usePagination(creditosOrdenados, 5);
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4">
@@ -31,11 +45,12 @@ const CreditHistoryTable = ({ creditos = [] }) => {
               {currentData.length > 0 ? (
                 currentData.map((credito) => {
                   const statusStyle = getStatusStyles(credito.estado);
+
                   return (
                     <TableBodyContent
                       key={credito.id}
-                      Id={typeof credito.id === 'string' ? credito.id.slice(0,3) : credito.id}
-                      Fecha={credito.fecha_solicitud}
+                      Id={typeof credito.id === 'string' ? credito.id.slice(0, 3) : credito.id}
+                      Fecha={dateFormatter.format(new Date(credito.fecha_solicitud))}
                       Tipo={credito.tipo_credito}
                       Valor={currencyFormatter.format(credito.monto_solicitado)}
                       Plazo={`${credito.plazo_meses} meses`}

@@ -1,11 +1,9 @@
-
 import jwt from 'jsonwebtoken';
 import { comparePassword } from '../../Auth/HashUse.js';
-import usuarios from '../../../BaseDatos_Simuladas/usuarios.js'; // Importa tu "DB" simulada
-import { config } from '../../config.js'; // ← Tu config existente
+import { config } from '../../config.js';
+import { pool } from '../../../Base_Datos_Local/index.js';
 
 const loginHandler = async (req, res) => {
-
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -13,37 +11,66 @@ const loginHandler = async (req, res) => {
   }
 
   try {
-     
-    const user = usuarios.find(u => u.email === email);
-    
+    const [rows] = await pool.execute(
+      `
+      SELECT id, email, password_hash, rol_id, asociado_id, estado
+      FROM usuarios
+      WHERE email = ?
+      LIMIT 1
+      `,
+      [email]
+    );
+
+    const user = rows[0];
+
     if (!user) {
       return res.status(401).json({ error: 'Credenciales inválidas' });
     }
 
-    const isMatch = await comparePassword(password, user.password_hash);
+    if (user.estado !== 'Activo') {
+      return res.status(403).json({ error: 'Usuario inactivo o bloqueado' });
+    }
+
+    const isMatch = await comparePassword(password , user.password_hash);
+
     if (!isMatch) {
       return res.status(401).json({ error: 'Credenciales inválidas' });
     }
-    
-    // JWT con tu config
+
     const token = jwt.sign(
-      { 
-        userId: user.id, 
-        username: user.username,
-        rol: user.rol
+      {
+        userId: user.id,
+        email: user.email,
+        rolId: user.rol_id,
+        asociadoId: user.asociado_id
       },
-      config.jwtSecret, // ← De tu config.js
+      config.jwtSecret,
       { expiresIn: config.jwtExpiresIn || '1h' }
     );
 
-    res.json({
+    await pool.execute(
+      `
+      UPDATE usuarios
+      SET ultimo_acceso = CURRENT_TIMESTAMP
+      WHERE id = ?
+      `,
+      [user.id]
+    );
+
+    return res.json({
       message: 'Login exitoso',
       token,
-      user: {id: user.id, username: user.username, email: user.email,rol:user.rol} 
+      user: {
+        id: user.id,
+        email: user.email,
+        rolId: user.rol_id,
+        asociadoId: user.asociado_id,
+        estado: user.estado
+      }
     });
   } catch (err) {
-    res.status(500).json({ error: 'Error interno del servidor' });
+    return res.status(500).json({ error: 'Error interno del servidor' });
   }
-}
+};
 
 export default loginHandler;

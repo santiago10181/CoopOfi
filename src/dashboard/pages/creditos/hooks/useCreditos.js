@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+const API_URL = 'http://localhost:3000/api/creditos';
 
 export const useCreditos = () => {
   const [creditos, setCreditos] = useState([]);
@@ -9,15 +11,24 @@ export const useCreditos = () => {
     let isMounted = true;
 
     const fetchCreditos = async () => {
+      if (isMounted) {
+        setLoading(true);
+        setError('');
+      }
+
       try {
         const token = localStorage.getItem('token');
 
         if (!token) {
-          if (isMounted) setError('No hay sesión activa');
+          if (isMounted) {
+            setCreditos([]);
+            setError('No hay sesión activa');
+            setLoading(false);
+          }
           return;
         }
 
-        const response = await fetch('http://localhost:3000/api/creditos', {
+        const response = await fetch(API_URL, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -25,20 +36,29 @@ export const useCreditos = () => {
           },
         });
 
-        const result = await response.json();
+        let result = {};
+
+        try {
+                   
+          result = await response.json();
+        } catch {
+          result = {};
+        }
 
         if (!isMounted) return;
 
-        if (response.ok) {
-          setCreditos(result.prestamos ?? []);
-          setError('');
-        } else {
+        if (!response.ok) {
+          setCreditos([]);
           setError(result.error || 'Error al cargar créditos');
+          return;
         }
-      } catch (err) {
-        if (isMounted) {
-          setError('Sin conexión al servidor');
-        }
+
+        setCreditos(result.solicitudes ?? []);
+        setError('');
+      } catch {
+        if (!isMounted) return;
+        setCreditos([]);
+        setError('Sin conexión al servidor');
       } finally {
         if (isMounted) {
           setLoading(false);

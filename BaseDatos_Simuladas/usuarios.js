@@ -1,4 +1,4 @@
-import {hashPassword} from '../BackEnd/Auth/HashUse.js';
+// import {hashPassword} from '../BackEnd/Auth/HashUse.js';
 const usuarios = [
   {
     id: 1,
@@ -6,14 +6,14 @@ const usuarios = [
     cedula: "1098765432",
     nombres: "Juan Carlos",
     apellidos: "Pérez Gómez",
-    email: "juan.perez@empresa.co",
+    email: "user@email.com",
     telefono: "3001234567",
     fecha_nacimiento: "1985-03-15",
     fecha_afiliacion: "2023-01-10",
     estado_civil: "casado",
     cargo_empresa: "Analista Senior",
     salario_base: 3500000,
-    password_hash: "12345678", // 123456
+    password_hash: "123456", // 123456
     is_active: true
   },
   {
@@ -50,9 +50,9 @@ const usuarios = [
   }
 ];
 
-usuarios.forEach(async (user) => {
-  user.password_hash = await hashPassword(user.password_hash);
-});
+// usuarios.forEach(async (user) => {
+//   user.password_hash = await hashPassword(user.password_hash);
+// });
 
-export default usuarios;
+ export default usuarios;
 //

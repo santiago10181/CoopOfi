@@ -6,7 +6,7 @@ import {PageLoader} from "../components/PageLoader";
 
 const DashboardCreditos = () => {
   const navigate = useNavigate();
-  const { creditos, loading, error } = useCreditos(); // ← Ahora sí se usa
+  const { creditos, loading, error } = useCreditos(); // ← Ahora sí se usa  
     
   const handleCreateRequest = () => {
     navigate('/CoopOfi/dashboard/creditos/nueva-solicitud');
