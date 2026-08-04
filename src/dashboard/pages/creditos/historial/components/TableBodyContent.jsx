@@ -1,4 +1,4 @@
-import { Children } from 'react';
+// src/pages/dashboard/credits/components/TableBodyContent.jsx
 import {TableBodyData} from '../../../components/TableBodyData';
 import {AccionsTableData} from '../../../components/AccionsTableData';
 import { ArrowUpRight } from 'lucide-react';

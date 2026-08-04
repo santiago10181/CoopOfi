@@ -1,35 +1,34 @@
-import { Children } from 'react';
-import {TableBodyData} from '../../../components/TableBodyData';
-import {AccionsTableData} from '../../../components/AccionsTableData';
-import { ArrowUpRight } from 'lucide-react';
+import { HeaderTableContent } from '../../../components/TableHeadContent';
 
-export const TableBodyContent = ({Id, Fecha, Tipo, Valor, Plazo, children}) => {
-    return (
-        <tr 
-            className="hover:bg-yellow-50/30 transition-colors duration-150 group"
-        >
-            {/* ID & FECHA */}
-            <TableBodyData main={Id} complement={Fecha} />
+export const TableHeaderRow = () => {
+  return (
+    <thead className="bg-gray-50/50">
+      <tr>
+        <HeaderTableContent
+          className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+          data="ID Solicitud"
+        />
 
-            {/* TIPO */}
-            <TableBodyData main={Tipo} >
-                <div className="flex-shrink-0 h-10 w-10 rounded-full bg-black flex items-center justify-center text-[#FFD700]">
-                    <ArrowUpRight className="h-5 w-5" />
-                </div>
-            </TableBodyData>
+        <HeaderTableContent
+          className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+          data="Detalles"
+        />
 
-            {/* VALOR */}
-            <TableBodyData main={Valor} complement={Plazo} />
+        <HeaderTableContent
+          className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+          data="Tipo"
+        />
 
-            {/* ESTADO */}
-            <td className="px-6 py-4 whitespace-nowrap text-center">
-                {children}
-            </td>
+        <HeaderTableContent
+          className="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider"
+          data="Estado"
+        />
 
-            {/* ACCIONES */}
-            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <AccionsTableData />
-            </td>
-        </tr>
-    );
+        <HeaderTableContent
+          className="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider"
+          data="Acciones"
+        />
+      </tr>
+    </thead>
+  );
 };

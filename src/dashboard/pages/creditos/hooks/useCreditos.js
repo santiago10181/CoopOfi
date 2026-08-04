@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-const API_URL = 'http://localhost:3000/api/creditos';
-
 export const useCreditos = () => {
   const [creditos, setCreditos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +26,8 @@ export const useCreditos = () => {
           return;
         }
 
-        const response = await fetch(API_URL, {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+        const response = await fetch(`${API_URL}/creditos`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -38,8 +37,7 @@ export const useCreditos = () => {
 
         let result = {};
 
-        try {
-                   
+        try {         
           result = await response.json();
         } catch {
           result = {};
@@ -49,11 +47,12 @@ export const useCreditos = () => {
 
         if (!response.ok) {
           setCreditos([]);
-          setError(result.error || 'Error al cargar créditos');
+          setError(result.message || 'Error al cargar créditos'); // Cambiado a result.message
           return;
         }
 
-        setCreditos(result.solicitudes ?? []);
+        // ✅ CORRECCIÓN AQUÍ: Leemos 'result.data' en lugar de 'result.solicitudes'
+        setCreditos(result.data ?? []);
         setError('');
       } catch {
         if (!isMounted) return;

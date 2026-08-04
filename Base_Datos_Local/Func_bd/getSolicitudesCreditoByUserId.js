@@ -1,31 +1,34 @@
-// Base_Datos_Local/Func_bd/getSolicitudesCreditoByUserId.js
-import {pool} from '../index.js';
+import { pool } from '../index.js';
 
 export const getSolicitudesCreditoByUserId = async (userId) => {
-  const query = `
-        SELECT
-      sc.id,
-      tc.nombre AS detalle_credito,
-      sc.monto_solicitado AS valor,
-      sc.plazo_solicitado_meses AS plazo_meses,
-      sc.estado,
-      sc.fecha_creacion AS fecha_solicitud,
-      (
-        SELECT sch.fecha_cambio
-        FROM solicitudes_credito_historial sch
-        WHERE sch.solicitud_creditoid = sc.id
-        ORDER BY sch.fecha_cambio DESC
-        LIMIT 1
-      ) AS ultima_actualizacion
-    FROM usuarios u
-    INNER JOIN solicitudes_credito sc
-      ON sc.asociadoid = u.asociado_id
-    INNER JOIN tipos_credito tc
-      ON tc.id = sc.tipo_creditoid
-    WHERE u.id = ?
-    ORDER BY sc.fecha_creacion DESC;
-  `;
+  // 1. Obtenemos el asociado_id del usuario autenticado
+  const [userRows] = await pool.execute(
+    `SELECT asociado_id FROM usuarios WHERE id = ?`,
+    [userId]
+  );
 
-  const [rows] = await pool.query(query, [userId]);
+  // Si el usuario (ej. un admin) no tiene asociado_id, devolvemos array vacío
+  if (userRows.length === 0 || !userRows[0].asociado_id) {
+    return [];
+  }
+
+  const asociadoId = userRows[0].asociado_id;
+
+  // 2. Buscamos las solicitudes de ese asociado específico
+  const [rows] = await pool.execute(
+    `SELECT 
+       sc.id, 
+       sc.monto_solicitado, 
+       sc.plazo_solicitado_meses, 
+       sc.estado, 
+       sc.fecha_creacion,
+       tc.nombre AS tipo_credito_nombre
+     FROM solicitudes_credito sc
+     LEFT JOIN tipos_credito tc ON sc.tipo_credito_id = tc.id
+     WHERE sc.asociado_id = ?
+     ORDER BY sc.fecha_creacion DESC`,
+    [asociadoId]
+  );
+
   return rows;
 };

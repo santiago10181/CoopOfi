@@ -1,13 +1,14 @@
-import { useUIStore }     from "../../store/useUIStore";
-import { SidebarHeader }  from "./componentes/SidebarHeader";
-import { SidebarMenu }    from "./componentes/SidebarMenu"
-import { SidebarFooter }  from "./componentes/SidebarFooter";
+import { useUIStore } from "../../store/useUIStore";
+import { SidebarHeader } from "./componentes/SidebarHeader";
+import { SidebarMenu } from "./componentes/SidebarMenu";
+import { SidebarFooter } from "./componentes/SidebarFooter";
 import {
   LayoutDashboard, Wallet, ArrowLeftRight,
   FileText, Bot, Receipt
-} from "lucide-react";
+} from "lucide-react"; // Librería de íconos moderna y muy ligera
 
-// ─── Menú organizado por grupos ───────────────────────────────────
+// Estructura de datos del menú. Al tenerlo como constante fuera del componente,
+// evitamos que React lo vuelva a crear en memoria en cada renderizado (Optimización).
 const MENU_GROUPS = [
   {
     label: "Principal",
@@ -33,15 +34,24 @@ const MENU_GROUPS = [
 ];
 
 const Sidebar = () => {
+  // Zustand nos da el estado de apertura y la función para cerrarlo
   const { isSidebarOpen, closeSidebar } = useUIStore();
 
+  // Función para cerrar el menú cuando se hace clic en un enlace desde un móvil
   const handleMobileClick = () => {
     if (window.innerWidth < 1024) closeSidebar();
   };
 
   return (
     <>
-      {/* Overlay móvil */}
+      {/* 
+        CAPA OSCURA (OVERLAY) - Solo visible en móviles
+        Se usa el patrón de Tailwind para crear animaciones sin CSS extra:
+        - 'fixed inset-0': Cubre toda la pantalla.
+        - 'bg-black/60 backdrop-blur-sm': Efecto vidrio esmerilado moderno.
+        - Condicional: Si está abierto, es visible y captura clics. Si no, es invisible 
+          y con 'pointer-events-none' deja que el usuario haga clic en lo que hay detrás.
+      */}
       <div
         onClick={closeSidebar}
         className={`
@@ -50,7 +60,14 @@ const Sidebar = () => {
         `}
       />
 
-      {/* Sidebar */}
+      {/* 
+        EL ASIDE (SIDEBAR REAL)
+        - 'fixed' en móviles para que flote sobre el contenido.
+        - 'lg:static' en escritorio para que ocupe su espacio en el Flexbox.
+        - 'transition-transform': Animación suave al deslizarse.
+        - '-translate-x-full': Lo empuja fuera de la pantalla a la izquierda cuando está cerrado en móvil.
+        - 'translate-x-0': Lo regresa a la posición 0 cuando está abierto.
+      */}
       <aside className={`
         fixed top-0 left-0 z-50 h-screen w-72 bg-white border-r border-gray-100
         flex flex-col transition-transform duration-300 ease-in-out
@@ -59,15 +76,16 @@ const Sidebar = () => {
         lg:translate-x-0 lg:static
       `}>
 
+        {/* Componentes internos del Sidebar para mantener limpio este archivo */}
         <SidebarHeader onClose={closeSidebar} />
-
+        
+        {/* Le pasamos el menú y la función de cierre al componente que itera y pinta los enlaces */}
         <SidebarMenu
           groups={MENU_GROUPS}
           onMobileItemClick={handleMobileClick}
         />
 
         <SidebarFooter />
-
       </aside>
     </>
   );

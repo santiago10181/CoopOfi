@@ -1,64 +1,31 @@
-// dashboard/hooks/useAutoFillFormFromUser.js
 import { useEffect } from "react";
-import { useDashboard } from "../../../../global_hooks/useDashboard";
+import { useDataUser } from "./useDataFill"; 
 
 export const useAutoFillFormFromUser = (reset, index) => {
-  const { userData } = useDashboard();
+  const { userData, loading, error } = useDataUser();
 
   useEffect(() => {
-    // Si no hay userData, no llenamos el formulario
     if (!userData || !reset || !index) return;
 
-    const allFields = index.flatMap((section) => section.fields);
-    const userDataValues = {};
+    // 1. Extraer nombres de campos válidos del index
+    const validFormFields = index
+      .flatMap((section) => section.fields)
+      .filter((field) => field.componentType !== "divider" && field.name)
+      .map((field) => field.name);
 
-    allFields.forEach((field) => {
-      const name = field.name;
-
-      switch (name) {
-        case "sol_nombre1":
-          userDataValues[name] = userData.nombres
-            ? userData.nombres.split(" ")[0]
-            : "";
-          break;
-        case "sol_nombre2":
-          userDataValues[name] = userData.nombres
-            ? userData.nombres.split(" ").slice(1).join(" ")
-            : "";
-          break;
-        case "sol_apellido1":
-          userDataValues[name] = userData.apellidos
-            ? userData.apellidos.split(" ")[0]
-            : "";
-          break;
-        case "sol_apellido2":
-          userDataValues[name] = userData.apellidos
-            ? userData.apellidos.split(" ").slice(1).join(" ")
-            : "";
-          break;
-
-        case "sol_num_doc":
-          userDataValues[name] = String(userData.cedula || "");
-          break;
-
-        case "sol_celular":
-          userDataValues[name] = String(userData.telefono || "");
-          break;
-
-        case "sol_email":
-          userDataValues[name] = userData.email || "";
-          break;
-
-        case "sol_fecha_nac":
-          userDataValues[name] = userData.fecha_nacimiento || "";
-          break;
-        default:
-          // Si no mapea con userData, no cambia el valor
-          break;
+    // 2. Mapear valores
+    const valuesToInject = {};
+    validFormFields.forEach((fieldName) => {
+      if (userData.hasOwnProperty(fieldName)) {
+        valuesToInject[fieldName] = userData[fieldName];
       }
     });
 
-    // 🚀 Llena el formulario con los datos del usuario
-    reset(userDataValues);
+    // 3. Inyectar en el formulario
+    reset(valuesToInject);
+
   }, [userData, index, reset]);
+
+  // Devolvemos userData para que el componente padre pueda usar las opciones (lineasCredito)
+  return { loading, error, userData }; 
 };

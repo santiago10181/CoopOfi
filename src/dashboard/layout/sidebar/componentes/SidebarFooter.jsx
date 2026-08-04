@@ -1,30 +1,38 @@
 import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useDashboardContext } from "../../../../global_hooks/DashboardContext"; // Ajusta la ruta relativa
 
 export const SidebarFooter = () => {
   const navigate = useNavigate();
+  const { userData } = useDashboardContext();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    // Opcional: llamar a endpoint de logout en backend para invalidar token
     navigate("/");
+  };
+
+  const getInitials = (name) => {
+    if (!name) return "??";
+    const names = name.split(' ');
+    return names[0].charAt(0) + (names[1]?.charAt(0) || '');
   };
 
   return (
     <div className="px-3 py-4 border-t border-gray-100 shrink-0">
       <div className="flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-gray-50 transition-all group">
-
         {/* Avatar */}
-        <div className="w-9 h-9 bg-black text-[#FFD700] rounded-xl flex items-center justify-center font-black text-xs shrink-0 shadow-md shadow-black/10">
-          SD
+        <div className="w-9 h-9 bg-black text-[#FFD700] rounded-xl flex items-center justify-center font-black text-xs shrink-0 shadow-md shadow-black/10 uppercase">
+          {getInitials(userData?.name)}
         </div>
 
         {/* Info usuario */}
         <div className="flex-1 min-w-0">
           <p className="text-sm font-bold text-gray-900 leading-tight truncate">
-            Santiago Dev
+            {userData?.name || "Cargando..."}
           </p>
           <p className="text-[10px] text-gray-400 font-medium">
-            Socio #8821
+            Socio #{userData?.id || "----"}
           </p>
         </div>
 
@@ -36,7 +44,6 @@ export const SidebarFooter = () => {
         >
           <LogOut size={15} strokeWidth={2.5} />
         </button>
-
       </div>
     </div>
   );

@@ -1,13 +1,15 @@
-import React from 'react';
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+
 import { HeaderDialog } from '../../components/HeaderDialog';
 import { SelectForm } from '../../components/SelectForm';
-import { AUXILIOS_CONFIG } from './data_dialog';
+import { TextArea } from '../../components/TextArea';
+
 import { InfoReq } from './components/InfoReq';
 import { FooterActions } from './components/FooterActions';
-import { InputFileForm } from '../../components/InputFileForm';
-import { TextArea } from '../../components/TextArea';
-import { useSubmitForm } from '../hooks/useSubmitForm'; // 👉 Importamos TU hook
+
+import { useSubmitAuxilioForm } from '../hooks/useSubmitForm';
+import { useConveniosDisponibles } from '../hooks/useConveniosDisponibles';
 
 const CreateAuxilioModal = ({ isOpen, onClose, onSuccess }) => {
   const {
@@ -16,41 +18,64 @@ const CreateAuxilioModal = ({ isOpen, onClose, onSuccess }) => {
     watch,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      convenioid: '',
+      description: '',
+    },
+  });
 
-  // 👉 Llamamos a TU hook en el nivel superior del componente
-  // Asumo que devuelve una función de submit y tal vez un estado de loading
-  const { submitForm, isSubmitting } = useSubmitForm(); 
-  // Observamos los valores
-  const selectedType = watch('type');
-  const selectedSubtype = watch('subtype');
+  const { submitForm, isSubmitting } = useSubmitAuxilioForm();
 
-  const currentTypeConfig = selectedType ? AUXILIOS_CONFIG[selectedType] : null;
+  const {
+    convenios,
+    loading: loadingConvenios,
+    error: errorConvenios,
+  } = useConveniosDisponibles();
 
-  const currentSubtype = currentTypeConfig?.subtypes.find(
-    (s) => s.id === selectedSubtype
-  ) ?? null;
+  const selectedConvenioId = watch('convenioid');
 
-  const subtypeOptions = currentTypeConfig
-    ? currentTypeConfig.subtypes.map((s) => ({ value: s.id, label: s.label }))
-    : [];
+  const convenioOptions = useMemo(() => {
+    return convenios.map((convenio) => ({
+      value: String(convenio.id),
+      label: convenio.nombre,
+    }));
+  }, [convenios]);
 
-  const typeOptions = Object.entries(AUXILIOS_CONFIG).map(([key, val]) => ({
-    value: key,
-    label: val.label,
-  }));
+  const currentConvenio = useMemo(() => {
+    return (
+      convenios.find(
+        (convenio) => String(convenio.id) === String(selectedConvenioId)
+      ) ?? null
+    );
+  }, [convenios, selectedConvenioId]);
 
-  // 👉 Creamos nuestra función local onSubmit
-  const onSubmit = async (data) => {
-    // 1. Usamos la función que te dio tu hook useSubmitForm
-    // (Asumo que tu hook hace el fetch al endpoint de auxilios)
-    const success = await submitForm('http://localhost:3000/api/auxilios/nueva-solicitud', data);
-    
-    // 2. Si el hook dice que todo salió bien...
-    if (success) {
-      reset(); // Limpiamos el formulario
-      onSuccess(); // Avisamos al padre (cierra modal y recarga tabla)
+  useEffect(() => {
+    if (!isOpen) {
+      reset();
     }
+  }, [isOpen, reset]);
+
+  const handleClose = () => {
+    if (isSubmitting) return;
+
+    reset();
+    onClose();
+  };
+
+  const onSubmit = async (data) => {
+    const result = await submitForm(
+      'http://localhost:3000/api/auxilios/nueva-solicitud',
+      data
+    );
+
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+
+    reset();
+    onSuccess();
   };
 
   if (!isOpen) return null;
@@ -58,28 +83,75 @@ const CreateAuxilioModal = ({ isOpen, onClose, onSuccess }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
       <div className="bg-white rounded-[32px] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-
-        <HeaderDialog title="Crear Nuevo Auxilio" onClose={onClose} />
+        <HeaderDialog
+          title="Crear Nueva Solicitud"
+          onClose={handleClose}
+        />
 
         <div className="px-8 pb-8 max-h-[80vh] overflow-y-auto custom-scrollbar">
-          {/* 👉 Pasamos nuestra función local a handleSubmit */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
-            <SelectForm label="Tipo de Auxilio" name="type" options={typeOptions} register={register} rules={{ required: 'Selecciona un tipo de auxilio' }} error={errors.type} />
-
-            {selectedType && (
-              <SelectForm label="Subtipo de Auxilio" name="subtype" options={subtypeOptions} register={register} rules={{ required: 'Selecciona un subtipo' }} error={errors.subtype} />
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6"
+          >
+            {loadingConvenios && (
+              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm text-blue-700">
+                Cargando auxilios y convenios disponibles...
+              </div>
             )}
 
-            {currentSubtype && (
-              <InfoReq currentSubtype={currentSubtype} />
+            {!loadingConvenios && errorConvenios && (
+              <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                {errorConvenios}
+              </div>
             )}
 
-            <TextArea label="Descripción Adicional" placeholder="..." register={register('description', { required: 'La descripción es obligatoria' })} error={errors.description} />
+            {!loadingConvenios && !errorConvenios && convenioOptions.length === 0 && (
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+                No hay auxilios o convenios activos disponibles para tu organización.
+              </div>
+            )}
 
-            <InputFileForm label="Adjuntar Documento" name="document" register={register} error={errors.document} />
+            {!loadingConvenios && !errorConvenios && convenioOptions.length > 0 && (
+              <SelectForm
+                label="Auxilio / convenio"
+                name="convenioid"
+                options={convenioOptions}
+                register={register}
+                rules={{
+                  required: 'Selecciona un auxilio o convenio',
+                }}
+                error={errors.convenioid}
+              />
+            )}
 
-            <FooterActions onClose={onClose} isSubmitting={isSubmitting} />
+            {currentConvenio && (
+              <InfoReq currentSubtype={currentConvenio} />
+            )}
+
+            <TextArea
+              label="Descripción adicional"
+              placeholder="Describe brevemente tu solicitud..."
+              name="description"
+              register={register}
+              rules={{
+                required: 'La descripción es obligatoria',
+                minLength: {
+                  value: 10,
+                  message:
+                    'Escribe una descripción de al menos 10 caracteres',
+                },
+              }}
+              error={errors.description}
+            />
+
+            <FooterActions
+              onClose={handleClose}
+              isSubmitting={
+                isSubmitting ||
+                loadingConvenios ||
+                convenioOptions.length === 0
+              }
+            />
           </form>
         </div>
       </div>

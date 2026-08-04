@@ -1,4 +1,3 @@
-// dashboard/pages/Home/hooks/useDashboard.jsx
 import { useState, useEffect } from 'react';
 
 export const useDashboard = () => {
@@ -10,13 +9,15 @@ export const useDashboard = () => {
     const fetchDashboard = async () => {
       try {
         const token = localStorage.getItem('token');
-
         if (!token) {
           setError('No hay sesión activa');
+          setLoading(false); // Asegurarnos de quitar el loading si retornamos antes
           return;
         }
-        // 📡 Token real
-        const response = await fetch('http://localhost:3000/api/dashboard', {
+        
+        // Usamos variable de entorno de Vite
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+        const response = await fetch(`${API_URL}/dashboard`, {
           method:  'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -27,8 +28,9 @@ export const useDashboard = () => {
         const result = await response.json();
 
         if (response.ok) {
-          // ✅ Normaliza: aplana user + mete prestamos al mismo nivel
-          setUserData({ ...result.user, prestamos: result.prestamos ?? [] });
+          // Como modificamos el backend para que traiga todo junto, 
+          // ajustamos la normalización
+          setUserData(result.user ? { ...result.user, prestamos: result.prestamos ?? [] } : result);
         } else {
           setError(result.error || 'Error al cargar dashboard');
         }
@@ -37,7 +39,7 @@ export const useDashboard = () => {
         setError('Sin conexión al servidor');
         console.error(err);
       } finally {
-        setLoading(false); // ✅ siempre se ejecuta, incluso tras return
+        setLoading(false);
       }
     };
 

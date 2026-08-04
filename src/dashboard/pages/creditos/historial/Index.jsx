@@ -1,3 +1,4 @@
+// src/pages/dashboard/credits/historial/index.jsx
 import React from 'react';
 import { usePagination } from '../hooks/usePagination';
 import { getStatusStyles } from './components/SwtichStyle';
@@ -19,13 +20,14 @@ const dateFormatter = new Intl.DateTimeFormat('es-CO', {
 });
 
 const CreditHistoryTable = ({ creditos = [] }) => {
+  // ✅ CORRECCIÓN: Mapeamos exactamente los nombres que envía el Backend
   const creditosOrdenados = [...creditos]
-    .map(({ id, fecha_solicitud, detalle_credito, valor, plazo_meses, estado }) => ({
+    .map(({ id, fecha_creacion, tipo_credito_nombre, monto_solicitado, plazo_solicitado_meses, estado }) => ({
       id,
-      fecha_solicitud,
-      tipo_credito: detalle_credito,
-      monto_solicitado: Number(valor),
-      plazo_meses,
+      fecha_solicitud: fecha_creacion,
+      tipo_credito: tipo_credito_nombre || 'Sin línea',
+      monto_solicitado: Number(monto_solicitado),
+      plazo_meses: plazo_solicitado_meses,
       estado,
     }))
     .sort((a, b) => new Date(b.fecha_solicitud) - new Date(a.fecha_solicitud));
@@ -49,8 +51,9 @@ const CreditHistoryTable = ({ creditos = [] }) => {
                   return (
                     <TableBodyContent
                       key={credito.id}
-                      Id={typeof credito.id === 'string' ? credito.id.slice(0, 3) : credito.id}
-                      Fecha={dateFormatter.format(new Date(credito.fecha_solicitud))}
+                      Id={credito.id}
+                      // ✅ Agregamos un fallback por si la fecha viene null
+                      Fecha={credito.fecha_solicitud ? dateFormatter.format(new Date(credito.fecha_solicitud)) : 'N/A'}
                       Tipo={credito.tipo_credito}
                       Valor={currencyFormatter.format(credito.monto_solicitado)}
                       Plazo={`${credito.plazo_meses} meses`}
@@ -64,7 +67,7 @@ const CreditHistoryTable = ({ creditos = [] }) => {
                 })
               ) : (
                 <tr>
-                  <td colSpan="6" className="px-6 py-10 text-center text-gray-500">
+                  <td colSpan="5" className="px-6 py-10 text-center text-gray-500">
                     No hay registros disponibles.
                   </td>
                 </tr>

@@ -1,4 +1,4 @@
-import { garantiasOptions, lineasCreditoOptions } from '../options/options.js';
+import { garantiasOptions } from '../options/options.js'; 
 
 export const datosGeneralesFields = {
   id: "datos_generales",
@@ -9,28 +9,28 @@ export const datosGeneralesFields = {
       label: "Tipo de Garantía",
       name: "sol_tipo_garantia",
       options: garantiasOptions,
-      // rules: { required: "Requerido" }
+      rules: { required: "Requerido" }
     },
     {
       componentType: 'select',
       label: "Línea de Crédito",
       name: "sol_id_linea_credito",
-      options: lineasCreditoOptions,
-      // rules: { required: "Requerido" }
+      options: [], 
+      rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
       label: "Monto solicitado",
       name: "sol_valor_credito",
-      type: "text", // Se usa text porque tiene máscara de moneda en el HTML
-      // rules: { required: "Requerido" }
+      type: "number",
+      rules: { required: "Requerido" }
     },
     {
       componentType: 'input',
-      label: "Plazo",
+      label: "Plazo (meses)",
       name: "sol_plazo_credito",
       type: "number",
-      // rules: { required: "Requerido", min: 1 }
+      rules: { required: "Requerido" }
     },
     {
       componentType: 'input',

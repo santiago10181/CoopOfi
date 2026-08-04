@@ -1,4 +1,4 @@
-export const SelectForm = ({ label, name, options = [], register, error, placeholder, className, ...props }) => {
+export const SelectForm = ({ label, name, options = [], register, rules, error, placeholder, className, ...props }) => {
   return (
     <div className={`w-full group ${className}`}>
       {label && (
@@ -10,7 +10,8 @@ export const SelectForm = ({ label, name, options = [], register, error, placeho
       <div className="relative">
         <select
           id={name}
-          {...(register && register(name))}
+
+          {...register(name, rules)}
           className={`
             w-full h-[48px] px-5 rounded-2xl text-slate-900 bg-slate-50/50 
             border-2 appearance-none cursor-pointer transition-all duration-300 outline-none font-semibold text-sm

@@ -1,21 +1,39 @@
-import { getAuxiliosByUserId } from '../../../BaseDatos_Simuladas/index.js';
+import { getAuxiliosByUserId } from '../../../Base_Datos_Local/Func_bd/getAuxiliosByUserId.js';
 
-const AuxiliosHandler = (req, res) => {
-  // 1. Obtenemos el ID del usuario desde la petición (middleware de auth)
-  const userId = req.user.userId;
-  
-  // 2. Traemos los auxilios de la BD simulada (o un arreglo vacío si no hay)
-  const historialAuxilios = getAuxiliosByUserId(userId) ?? [];
+const AuxiliosHandler = async (req, res) => {
+  try {
+    const userId = req.user?.userId;
 
-  // 3. Los ordenamos desde el más reciente al más antiguo, usando fecha_solicitud
-  const auxiliosOrdenados = [...historialAuxilios]
-    .sort((a, b) => new Date(b.fecha_solicitud) - new Date(a.fecha_solicitud));
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'Usuario no autenticado.',
+        auxilios: [],
+      });
+    }
 
-  // 4. Respondemos con código 200 (OK) y los datos estructurados
-  return res.status(200).json({
-    total: auxiliosOrdenados.length,
-    auxilios: auxiliosOrdenados,
-  });
+    const auxilios = await getAuxiliosByUserId(userId);
+
+    return res.status(200).json({
+      success: true,
+      total: auxilios.length,
+      auxilios,
+    });
+  } catch (error) {
+    console.error('Error en AuxiliosHandler:', {
+      message: error.message,
+      code: error.code,
+      errno: error.errno,
+      sqlMessage: error.sqlMessage,
+      sqlState: error.sqlState,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'Error interno del servidor.',
+      auxilios: [],
+    });
+  }
 };
 
-export default AuxiliosHandler;
+export default AuxiliosHandler; 

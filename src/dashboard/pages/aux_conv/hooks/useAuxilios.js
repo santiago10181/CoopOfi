@@ -1,53 +1,56 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useAuxilios = () => {
   const [auxilios, setAuxilios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  
-  // 👉 NUEVO 1: Estado para disparar la recarga
-  const [reloadTrigger, setReloadTrigger] = useState(false); 
+  const [reloadTrigger, setReloadTrigger] = useState(0);
 
-  // 👉 NUEVO 2: Función que cambia el trigger para forzar el useEffect
-  const refetch = () => setReloadTrigger(prev => !prev);
+  const refetch = useCallback(() => {
+    setReloadTrigger((currentValue) => currentValue + 1);
+  }, []);
 
   useEffect(() => {
-    let isMounted = true;
+    const controller = new AbortController();
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
     const fetchAuxilios = async () => {
-      // Opcional: setLoading(true) aquí para que se vea que recarga
+      setLoading(true);
+      setError('');
+
       try {
         const token = localStorage.getItem('token');
 
         if (!token) {
-          if (isMounted) setError('No hay sesión activa');
-          return;
+          throw new Error('No hay sesión activa');
         }
 
-        const response = await fetch('http://localhost:3000/api/auxilios', {
+        const response = await fetch(`${API_URL}/auxilios`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
           },
+          signal: controller.signal,
         });
 
         const result = await response.json();
 
-        if (!isMounted) return;
-
-        if (response.ok) {
-          setAuxilios(result.auxilios ?? []);
-          setError('');
-        } else {
-          setError(result.error || 'Error al cargar auxilios');
+        if (!response.ok) {
+          throw new Error(
+            result.error ||
+              result.message ||
+              'Error al cargar las solicitudes'
+          );
         }
-      } catch (err) {
-        if (isMounted) {
-          setError('Sin conexión al servidor');
+
+        setAuxilios(result.auxilios ?? []);
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          setError(error.message || 'Sin conexión al servidor');
+          setAuxilios([]);
         }
       } finally {
-        if (isMounted) {
+        if (!controller.signal.aborted) {
           setLoading(false);
         }
       }
@@ -55,10 +58,13 @@ export const useAuxilios = () => {
 
     fetchAuxilios();
 
-    return () => {
-      isMounted = false;
-    };
-  }, [reloadTrigger]); // 👉 NUEVO 3: Agregamos reloadTrigger a las dependencias
+    return () => controller.abort();
+  }, [reloadTrigger]);
 
-  return { auxilios, loading, error, refetch }; 
+  return {
+    auxilios,
+    loading,
+    error,
+    refetch,
+  };
 };
